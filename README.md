@@ -6,4 +6,4 @@ Clone Repository
 
 From eclipse, file > import > General > Existing Proects into Workspace
 
-Select "Browser..." and Naivagte to parent folder of repository
+Select "Browser..." and navigate to parent folder of repository
