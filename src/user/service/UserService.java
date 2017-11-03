@@ -5,6 +5,7 @@ import java.util.List;
 import user.dao.UserDao;
 import user.domain.User;
 
+
 /**
  * logic functions such as register, login
  * @author changxin bai
@@ -18,7 +19,7 @@ public class UserService {
 	 * @param form
 	 * @throws ClassNotFoundException 
 	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws InstantiationException
 	 */
 	public void regist(User form) throws UserException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		
@@ -36,7 +37,7 @@ public class UserService {
 	 * @throws UserException 
 	 * @throws ClassNotFoundException 
 	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
+	 * @throws InstantiationException
 	 */
 	public void login(User form) throws UserException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		User user = userDao.findByUsername(form.getUsername());

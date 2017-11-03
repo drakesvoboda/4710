@@ -70,7 +70,7 @@ public class UserServletRegister extends HttpServlet {
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		
 	}
 

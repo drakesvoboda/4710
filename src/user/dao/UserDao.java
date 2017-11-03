@@ -5,12 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
-
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+
+
 
 import user.domain.User;
 
@@ -36,10 +40,11 @@ public class UserDao {
 		User user = new User();
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connect = DriverManager
-			          .getConnection("jdbc:mysql://localhost/testdb?"
-				              + "user=root&password=banana");
+			InitialContext context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/testdb");
+			
+			Connection connect = dataSource.getConnection();
+			
 		    String sql = "select * from tb_user where username=?";
 		    PreparedStatement preparestatement = connect.prepareStatement(sql); 
 		    preparestatement.setString(1,username);
@@ -58,6 +63,9 @@ public class UserDao {
 		    
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return user;
 	}
@@ -74,10 +82,10 @@ public class UserDao {
 	 */
 	public void add(User user) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connect = DriverManager
-			          .getConnection("jdbc:mysql://localhost/testdb?"
-				              + "user=root&password=banana");
+			InitialContext context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/testdb");
+			
+			Connection connect = dataSource.getConnection();
 			
 			
 			String sql = "insert into tb_user values(?,?,?)";
@@ -88,6 +96,9 @@ public class UserDao {
 		    preparestatement.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -95,10 +106,10 @@ public class UserDao {
 	public List<Object> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		List<Object> list = new ArrayList<>();
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connect = DriverManager
-			          .getConnection("jdbc:mysql://localhost/testdb?"
-				              + "user=root&password=banana");
+			InitialContext context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/testdb");
+			
+			Connection connect = dataSource.getConnection();
 			
 			
 			String sql = "select * from tb_user";
@@ -115,6 +126,9 @@ public class UserDao {
 			 
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return list;
 		
