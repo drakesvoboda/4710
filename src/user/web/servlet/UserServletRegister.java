@@ -2,19 +2,16 @@ package user.web.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.jws.WebService;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.dao.UserDao;
+import org.apache.catalina.tribes.util.Arrays;
+
 import user.domain.User;
 import user.service.UserException;
 import user.service.UserService;
@@ -22,9 +19,8 @@ import user.service.UserService;
 /**
  * Servlet implementation class UserServlet
  */
-
 public class UserServletRegister extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 102831973239L;
        
     /**
      * @see HttpServlet#HttpServlet()
