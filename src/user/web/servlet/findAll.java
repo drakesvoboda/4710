@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.domain.User;
 import user.service.UserService;
 
 /**
@@ -36,7 +37,7 @@ public class findAll extends HttpServlet {
 			e.printStackTrace();
 		}
 		try {
-			List<Object> li = userservice.findall();
+			List<User> li = userservice.findall();
 			for(int i = 0; i < li.size();i++){
 				System.out.println(li.get(i).toString());
 			}

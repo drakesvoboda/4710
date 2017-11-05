@@ -1,31 +1,45 @@
 package user.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-
-
-
+import Dao.Dao;
+import Dao.IDao;
+import Dao.IMapper;
 import user.domain.User;
-
-
 
 /**
  * DDL functions performed in database
  * @author changxin bai
  *
  */
-public class UserDao {
+public class UserDao extends Dao<User, String> {
+	
+	private static IMapper<User> USER_MAPPER = new IMapper<User>(){
+		@Override
+		public User map(ResultSet resultSet) throws SQLException{
+			User user = new User();
+			
+    		user.setUsername(resultSet.getString("username"));
+    		user.setPassword(resultSet.getString("password"));
+    		user.setEmail(resultSet.getString("email"));
+			
+			return user;			
+		}
+	};
+	
+	public UserDao() {
+		super(USER_MAPPER);
+	}
+
 	
 	
 	/**
@@ -37,41 +51,16 @@ public class UserDao {
 	 * @throws InstantiationException 
 	 */
 	public User findByUsername(String username) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		User user = new User();
-		try {
-			
-			InitialContext context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/testdb");
-			
-			Connection connect = dataSource.getConnection();
-			
-		    String sql = "select * from tb_user where username=?";
-		    PreparedStatement preparestatement = connect.prepareStatement(sql); 
-		    preparestatement.setString(1,username);
-		    ResultSet resultSet = preparestatement.executeQuery();
-		    //ResultSet resultSet  = preparestatement.executeUpdate();
-		    while(resultSet.next()){
-		    	String user_name = resultSet.getString("username");
-		    	if(user_name.equals(username)){
-		    		user.setUsername(resultSet.getString("username"));
-		    		user.setPassword(resultSet.getString("password"));
-		    		user.setEmail(resultSet.getString("email"));
-		    		
-		    	}
-		    }
+		List<User> users = select("select * from tb_user where username=?", username);
 		
-		    
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(users.isEmpty()){
+			
+			return new User();
+		}else{
+			return users.get(0);
 		}
-		return user;
+		
 	}
-	
-	
-	
 	
 	/**
 	 * insert User
@@ -102,35 +91,9 @@ public class UserDao {
 		}
 	}
 	
-	
-	public List<Object> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
-		List<Object> list = new ArrayList<>();
-		try {
-			InitialContext context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/testdb");
-			
-			Connection connect = dataSource.getConnection();
-			
-			
-			String sql = "select * from tb_user";
-			PreparedStatement preparestatement = connect.prepareStatement(sql); 
-			ResultSet resultSet = preparestatement.executeQuery();
-			
-			while(resultSet.next()){
-				User user = new User();
-				user.setUsername(resultSet.getString("username"));
-	    		user.setPassword(resultSet.getString("password"));
-	    		user.setEmail(resultSet.getString("email"));
-	    		list.add(user);
-			 }
-			 
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
+	public List<User> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		
+		return select("select * from tb_user");
 		
 	}
 		

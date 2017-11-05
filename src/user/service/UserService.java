@@ -50,7 +50,7 @@ public class UserService {
 		
 	}
 	
-	public List<Object> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+	public List<User> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
 		return userDao.findall();
 		
 	}
