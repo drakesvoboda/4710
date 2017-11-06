@@ -6,6 +6,7 @@ package user.domain;
  * @author changxin bai
  * 
  */
+
 public class User {
 	/*
 	 * Correspond to the user table

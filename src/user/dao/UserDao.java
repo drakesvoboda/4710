@@ -38,9 +38,7 @@ public class UserDao extends Dao<User, String> {
 	
 	public UserDao() {
 		super(USER_MAPPER);
-	}
-
-	
+	}	
 	
 	/**
 	 * get the search result with username 
@@ -53,13 +51,11 @@ public class UserDao extends Dao<User, String> {
 	public User findByUsername(String username) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		List<User> users = select("select * from tb_user where username=?", username);
 		
-		if(users.isEmpty()){
-			
+		if(users.isEmpty()){		
 			return new User();
 		}else{
 			return users.get(0);
 		}
-		
 	}
 	
 	/**
@@ -70,31 +66,10 @@ public class UserDao extends Dao<User, String> {
 	 * @throws InstantiationException 
 	 */
 	public void add(User user) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		try {
-			InitialContext context = new InitialContext();
-			DataSource dataSource = (DataSource) context.lookup("java:/comp/env/jdbc/testdb");
-			
-			Connection connect = dataSource.getConnection();
-			
-			
-			String sql = "insert into tb_user values(?,?,?)";
-			PreparedStatement preparestatement = connect.prepareStatement(sql); 
-		    preparestatement.setString(1,user.getUsername());
-		    preparestatement.setString(2,user.getPassword());
-		    preparestatement.setString(3,user.getEmail());
-		    preparestatement.executeUpdate();
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		update("insert into tb_user values(?,?,?)", user.getUsername(), user.getPassword(), user.getEmail());
 	}
 	
 	public List<User> findall() throws InstantiationException, IllegalAccessException, ClassNotFoundException{
-		
 		return select("select * from tb_user");
-		
 	}
-		
 }

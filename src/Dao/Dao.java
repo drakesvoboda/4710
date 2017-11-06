@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class Dao <T, PK extends Serializable> implements IDao<T, PK> {
+public abstract class Dao <T, PK> implements IDao<T, PK> {
 	
 	protected Class<T> type;
 	protected String table_name;
@@ -81,4 +81,24 @@ public abstract class Dao <T, PK extends Serializable> implements IDao<T, PK> {
 		return null;
 	}
 	
+	@Override
+	public void update(final String sql, final Object... args){
+		PreparedStatement preparedStatement;
+		try(Connection connect = ConnectionManager.getConnection())
+		{		
+		    preparedStatement = connect.prepareStatement(sql); 
+		    
+		    for(int i = 0; i < args.length; ++i){	    	
+		    	preparedStatement.setObject(i + 1, args[i]);
+		    }
+		    
+		    preparedStatement.executeUpdate();	    
+		   
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			
+		}
+	}
 }
