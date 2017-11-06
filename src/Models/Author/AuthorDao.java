@@ -28,8 +28,7 @@ public class AuthorDao extends Dao<Author, String> {
 		super(AUTHOR_MAPPER);
 	}	
 	
-	public List<Author> getAuthorByName(String authorName){
-		
+	public List<Author> getAuthorByName(String authorName){	
 		return select("SELECT * FROM Author WHERE authorname = ?", authorName);
 	}
 
