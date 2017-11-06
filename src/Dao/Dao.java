@@ -1,9 +1,9 @@
 package Dao;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,17 +52,12 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 	
 	@Override
 	public List<T> select(final String sql, final Object... args){
-		PreparedStatement preparedStatement;
-		ResultSet resultSet;
+
 		try(Connection connect = ConnectionManager.getConnection())
 		{		
-		    preparedStatement = connect.prepareStatement(sql); 
+			PreparedStatement preparedStatement = createStatement(connect, sql, args);
 		    
-		    for(int i = 0; i < args.length; ++i){	    	
-		    	preparedStatement.setObject(i + 1, args[i]);
-		    }
-		    
-		    resultSet = preparedStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 		    
 		    final List<T> ret = new ArrayList<T>();
 		    
@@ -83,22 +78,29 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 	
 	@Override
 	public void update(final String sql, final Object... args){
-		PreparedStatement preparedStatement;
 		try(Connection connect = ConnectionManager.getConnection())
 		{		
-		    preparedStatement = connect.prepareStatement(sql); 
-		    
-		    for(int i = 0; i < args.length; ++i){	    	
-		    	preparedStatement.setObject(i + 1, args[i]);
-		    }
+			PreparedStatement preparedStatement = createStatement(connect, sql, args);
 		    
 		    preparedStatement.executeUpdate();	    
 		   
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			
 		}
+	}
+	
+	private PreparedStatement createStatement(final Connection connect, final String sql, final Object... args) throws SQLException{
+		PreparedStatement preparedStatement;
+		
+		preparedStatement = connect.prepareStatement(sql); 
+	    
+	    for(int i = 0; i < args.length; ++i){	    	
+	    	preparedStatement.setObject(i + 1, args[i]);
+	    }
+		
+		return preparedStatement;		
 	}
 }
