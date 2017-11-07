@@ -1,5 +1,6 @@
 package Servlets;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,14 +41,59 @@ public class InitDatabase extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Scanner scanner = null;
 		Statement statement = null;
-	    try{
-	    	scanner = new Scanner("/Sql/inti.sql").useDelimiter(";");
+		
+		File file = new File(".");
+		for(String fileNames : file.list()) System.out.println(fileNames);
+		
+		String[] scanner = new String("DROP TABLE IF EXISTS Paper, Author, Writes, PCMember, Review;" +
+											"CREATE TABLE Paper	(                                              " +
+											"	PaperID 	INTEGER,                                           " +
+											"	Title 		VARCHAR(50),                                       " +
+											"	Abstract 	VARCHAR(250),                                      " +
+											"	Pdf 		VARCHAR(100),                                      " +
+											"	PRIMARY KEY (PaperID)                                          " +
+											");                                                                " +
+											"                                                                  " +
+											"CREATE TABLE Author	(                                          " +
+											"	Email 		VARCHAR(100),                                      " +
+											"	AuthorName 	VARCHAR(50),                                       " +
+											"	Affiliation VARCHAR(100),                                      " +
+											"	PRIMARY KEY (email)                                            " +
+											");                                                                " +
+											"                                                                  " +
+											"CREATE TABLE Writes(                                              " +
+											"	PaperID 	INTEGER,                                           " +
+											"	Email 		VARCHAR(50),                                       " +
+											"	AuthorOrder INTEGER,                                           " +
+											"	PRIMARY KEY (PaperID, Email),                                  " +
+											"	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               " +
+											"	FOREIGN KEY (Email) REFERENCES Author(Email)                   " +
+											");                                                                " +
+											"                                                                  " +
+											"CREATE TABLE PCMember(                                            " +
+											"	Email 		VARCHAR(50),                                       " +
+											"	MemberName 	VARCHAR(20),                                       " +
+											"	PRIMARY KEY (email)		                                       " +
+											");                                                                " +
+											"                                                                  " +
+											"CREATE TABLE Review(                                              " +
+											"	ReportID 	INTEGER,                                           " +
+											"	SubDate 	DATE,                                              " +
+											"	Comment		VARCHAR(250),                                      " +
+											"	Recommend	CHAR(1),                                           " +
+											"	PaperID 	INTEGER,                                           " +
+											"	Email 		VARCHAR(100),                                      " +
+											"	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               " +
+											"	FOREIGN KEY (Email) REFERENCES PCMember(Email),                " +
+											"	UNIQUE (PaperID, Email)                                        " +
+											");                                                                ").split(";");
+		
+
 	    	try(Connection connect = ConnectionManager.getConnection())
 			{		
-				while(scanner.hasNext()){			
-					String sqlStatement = scanner.next() + ";";
+				for(int i = 0; i < scanner.length; ++i)	{		
+					String sqlStatement = scanner[i] + ";";
 					try{
 						statement = connect.createStatement();
 						statement.execute(sqlStatement);
@@ -63,10 +109,7 @@ public class InitDatabase extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-	    	
-	    }finally{
-	    	scanner.close();
-	    };		
+	
 		
 	}
 

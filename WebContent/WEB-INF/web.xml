@@ -11,12 +11,13 @@
   <servlet-mapping>
     <servlet-name>UserServletRegister</servlet-name>
     <url-pattern>/UserServletRegister</url-pattern>
+   </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>UserServletRegister</display-name>
     <servlet-name>UserServletRegister</servlet-name>
     <servlet-class>user.web.servlet.UserServletRegister</servlet-class>
-  </servlet></servlet-mapping>
+  </servlet>
   <servlet>
     <description></description>
     <display-name>UserServletLogin</display-name>
