@@ -32,18 +32,8 @@
   
   <body>
 <h1 style="text-align: center;">CSC4710</h1>
-<div style="font-size: 10pt;">
-	<c:choose>
-		<c:when test="${empty sessionScope.session_user }">
-			<a href="<c:url value='/jsps/user/login.jsp'/>" target="_parent">Login</a> |&nbsp; 
-			<a href="<c:url value='/jsps/user/regist.jsp'/>" target="_parent">Register</a>		
-		</c:when>
-		<c:otherwise>
-			Hello：${sessionScope.session_user.username };
-			<a href="<c:url value='/jsps/item.jsp'/>" target="body">Query Result</a>&nbsp;&nbsp;
-		</c:otherwise>
-	</c:choose>
-
+<div style="font-size: 24pt;">
+	<a href="<c:url value='/InitDatabase'/>" target="_parent">Initialize Database</a> |&nbsp; 
 </div>
   </body>
 </html>
