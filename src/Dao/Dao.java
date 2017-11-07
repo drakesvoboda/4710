@@ -52,12 +52,13 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 	
 	@Override
 	public List<T> select(final String sql, final Object... args){
-
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		try(Connection connect = ConnectionManager.getConnection())
 		{		
-			PreparedStatement preparedStatement = createStatement(connect, sql, args);
+			preparedStatement = createStatement(connect, sql, args);
 		    
-			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();
 		    
 		    final List<T> ret = new ArrayList<T>();
 		    
@@ -71,7 +72,7 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
-			
+			ConnectionManager.close(preparedStatement, resultSet);
 		}
 		return null;
 	}
