@@ -2,8 +2,6 @@ package Models.Writes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-
 import Models.Writes.Writes;
 import Dao.Dao;
 import Dao.IMapper;

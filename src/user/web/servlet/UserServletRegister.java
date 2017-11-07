@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.tribes.util.Arrays;
 
 import user.domain.User;
-import user.service.UserException;
 import user.service.UserService;
 
 /**
