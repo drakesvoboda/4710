@@ -2,8 +2,6 @@ package Models.Review;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
 import Models.Review.Review;
 import Dao.Dao;
 import Dao.IMapper;

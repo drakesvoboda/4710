@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import user.dao.UserDao;
 import user.domain.User;
-import user.service.UserException;
 import user.service.UserService;
 
 /**

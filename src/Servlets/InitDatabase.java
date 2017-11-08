@@ -1,10 +1,7 @@
 package Servlets;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Scanner;
 
@@ -43,8 +40,6 @@ public class InitDatabase extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AuthorDao asdf = new AuthorDao(); //Test Statement
-		
 		Statement statement = null;
 		
 		
@@ -92,10 +87,11 @@ public class InitDatabase extends HttpServlet {
 											");                                                                ").split(";");
 		
 
+
 	    	try(Connection connect = ConnectionManager.getConnection())
 			{		
-				for(int i = 0; i < scanner.length; ++i)	{		
-					String sqlStatement = scanner[i] + ";";
+				while(scanner.hasNext()){			
+					String sqlStatement = scanner.next() + ";";
 					try{
 						statement = connect.createStatement();
 						statement.execute(sqlStatement);
@@ -111,7 +107,10 @@ public class InitDatabase extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-	
+	    	
+	    }finally{
+	    	scanner.close();
+	    };		
 		
 	}
 

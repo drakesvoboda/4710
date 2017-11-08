@@ -1,6 +1,5 @@
 package Dao;
 
-import java.io.Serializable;
 import java.util.List;
 
 public interface IDao <T, PK>{
