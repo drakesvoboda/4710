@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import Dao.Dao;
 import Dao.IMapper;
 import Models.PCMember.PCMember;
-import MySqlAnnotations.MySqlAnnotationNotFoundException;
 
 public class PCMemberDao extends Dao<PCMember, String> {
 	
@@ -22,7 +21,7 @@ public class PCMemberDao extends Dao<PCMember, String> {
 		}
 	};
 	
-	public PCMemberDao() throws MySqlAnnotationNotFoundException {
+	public PCMemberDao() {
 		super(PCMEMBER_MAPPER, PCMember.class);
 	}		
 
