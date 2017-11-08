@@ -1,6 +1,7 @@
 package Dao;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,16 +9,34 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import MySqlAnnotations.*;
+
 
 public abstract class Dao <T, PK> implements IDao<T, PK> {
 	
-	protected Class<T> type;
-	protected String table_name;
-	protected String primary_key;
+	
 	protected IMapper<T> mapper;
 	
-	public Dao(IMapper<T> mapper){
+	protected Class<T> TYPE;
+	protected String TABLE_NAME;
+	protected String PRIMARY_KEY;
+	
+	public Dao(IMapper<T> mapper, Class<T> TYPE){
 		this.mapper = mapper;
+		
+		this.TYPE = TYPE;
+		
+		try
+		{
+			Annotation annotation = TYPE.getAnnotation(TableName.class);
+			TableName tableName = (TableName) annotation;
+		
+			this.TABLE_NAME = tableName.value();
+		} 
+		catch(NullPointerException e)
+		{
+			System.out.println("Class " + TYPE.getName() + " must have the TableName annotation");
+		}
 	}
 	
 

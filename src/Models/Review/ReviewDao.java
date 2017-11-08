@@ -28,7 +28,7 @@ public class ReviewDao extends Dao<Review, String> {
 	
 	
 	public ReviewDao() {
-		super(WRITES_MAPPER);
+		super(WRITES_MAPPER, Review.class);
 	}	
 
 }

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.dao.UserDao;
 import Dao.ConnectionManager;
+import Models.Author.AuthorDao;
 
 /**
  * Servlet implementation class UserServlet
@@ -41,10 +43,10 @@ public class InitDatabase extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		AuthorDao asdf = new AuthorDao(); //Test Statement
+		
 		Statement statement = null;
 		
-		File file = new File(".");
-		for(String fileNames : file.list()) System.out.println(fileNames);
 		
 		String[] scanner = new String("DROP TABLE IF EXISTS Paper, Author, Writes, PCMember, Review;" +
 											"CREATE TABLE Paper	(                                              " +

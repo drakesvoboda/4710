@@ -25,7 +25,7 @@ public class AuthorDao extends Dao<Author, String> {
 	
 	
 	public AuthorDao() {
-		super(AUTHOR_MAPPER);
+		super(AUTHOR_MAPPER, Author.class);
 	}	
 	
 	public List<Author> getAuthorByName(String authorName){	

@@ -1,5 +1,8 @@
 package Models.Author;
 
+import MySqlAnnotations.*;
+
+@TableName("author")
 public class Author {
 	public String getEmail() {
 		return Email;
@@ -19,7 +22,14 @@ public class Author {
 	public void setAffiliation(String affiliation) {
 		Affiliation = affiliation;
 	}
+	
+	@ColumnName("email")
 	public String Email;
+	
+	@PrimaryKey
+	@ColumnName("authorname")
 	public String AuthorName;
+	
+	@ColumnName("affiliation")
 	public String Affiliation;
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import Dao.IMapper;
 import Dao.Dao;
 import Models.Paper.Paper;
+import MySqlAnnotations.MySqlAnnotationNotFoundException;
 
 public class PaperDao extends Dao<Paper, Integer> {
 
@@ -24,7 +25,7 @@ public class PaperDao extends Dao<Paper, Integer> {
 	};
 	
 	
-	public PaperDao() {
-		super(PAPER_MAPPER);
+	public PaperDao() throws MySqlAnnotationNotFoundException {
+		super(PAPER_MAPPER, Paper.class);
 	}		
 }

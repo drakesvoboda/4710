@@ -23,9 +23,7 @@ public class WritesDao extends Dao<Writes, String> {
 		}
 	};
 	
-	
 	public WritesDao() {
-		super(WRITES_MAPPER);
+		super(WRITES_MAPPER, Writes.class);
 	}	
-
 }
