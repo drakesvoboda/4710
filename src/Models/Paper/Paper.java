@@ -1,5 +1,8 @@
 package Models.Paper;
 
+import MySqlAnnotations.*;
+
+@TableName("paper")
 public class Paper {
 	public int id;
 	public String title;

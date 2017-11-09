@@ -29,7 +29,7 @@ public class UserDao extends Dao<User, String> {
 	};
 	
 	public UserDao() {
-		super(USER_MAPPER);
+		super(USER_MAPPER, User.class);
 	}	
 	
 	/**

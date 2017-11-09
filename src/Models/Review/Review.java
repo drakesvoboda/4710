@@ -2,12 +2,22 @@ package Models.Review;
 
 import java.util.Date;
 
+import MySqlAnnotations.*;
+
+@TableName("review")
 public class Review {
+	
+	@PrimaryKey
 	public int ReportID;
+	
 	public Date SubDate;
 	public String Comment;
 	public boolean Recommend;
+	
+	
+	@ForeignKey(ForeignColumn = "PaperID", ForeignTable = "paper")
 	public int PaperID;
+	
 	public String Email;
 	
 	public int getReportID() {

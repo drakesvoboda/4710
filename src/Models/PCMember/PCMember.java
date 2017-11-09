@@ -1,5 +1,8 @@
 package Models.PCMember;
 
+import MySqlAnnotations.*;
+
+@TableName("PCMember")
 public class PCMember {
 	public String email;
 	public String memberName;

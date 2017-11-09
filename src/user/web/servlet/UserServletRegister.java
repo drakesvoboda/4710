@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.tribes.util.Arrays;
 
 import user.domain.User;
+import user.service.UserException;
 import user.service.UserService;
 
 /**
@@ -57,8 +58,7 @@ public class UserServletRegister extends HttpServlet {
 		form.setEmail(info.get(3));
 		
 		try {
-			userservice.regist(form);
-			
+			userservice.regist(form);		
 			response.sendRedirect( request.getContextPath() + "/jsps/user/login.jsp");
 		} catch (ClassNotFoundException | UserException e) {
 			// TODO Auto-generated catch block

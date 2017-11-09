@@ -2,11 +2,14 @@ package Models.Writes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import Models.Writes.Writes;
+import Models.Writes.Writes.WritesPK;
+
 import Dao.Dao;
 import Dao.IMapper;
 
-public class WritesDao extends Dao<Writes, String> {
+public class WritesDao extends Dao<Writes, WritesPK> {
 
 	private static IMapper<Writes> WRITES_MAPPER = new IMapper<Writes>(){
 		@Override

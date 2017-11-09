@@ -1,9 +1,22 @@
 package Models.Writes;
 
+import java.io.Serializable;
+
+import MySqlAnnotations.*;
+
 public class Writes {
+	
+	@PrimaryKey
 	public int PaperId;
+	@PrimaryKey
 	public String Email;
+	
 	public int AuthorOrder;
+	
+	public static class WritesPK implements Serializable{
+		public String Email;
+		public int PaperId;
+	}
 	
 	public int getPaperId() {
 		return PaperId;

@@ -11,12 +11,13 @@
   <servlet-mapping>
     <servlet-name>UserServletRegister</servlet-name>
     <url-pattern>/UserServletRegister</url-pattern>
+    </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>UserServletRegister</display-name>
     <servlet-name>UserServletRegister</servlet-name>
     <servlet-class>user.web.servlet.UserServletRegister</servlet-class>
-  </servlet></servlet-mapping>
+  </servlet>
   <servlet>
     <description></description>
     <display-name>UserServletLogin</display-name>
@@ -47,6 +48,40 @@
     <servlet-name>InitDatabase</servlet-name>
     <url-pattern>/InitDatabase</url-pattern>
   </servlet-mapping>
+ 
+  <servlet>
+    <description></description>
+    <display-name>PaperUpdate</display-name>
+    <servlet-name>PaperUpdate</servlet-name>
+    <servlet-class>Servlets.PaperUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaperUpdate</servlet-name>
+    <url-pattern>/Paper/Update</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>PaperList</display-name>
+    <servlet-name>PaperList</servlet-name>
+    <servlet-class>Servlets.PaperList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaperList</servlet-name>
+    <url-pattern>/Paper/List</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>PaperEdit</display-name>
+    <servlet-name>PaperEdit</servlet-name>
+    <servlet-class>Servlets.PaperEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaperEdit</servlet-name>
+    <url-pattern>/Paper/Edit</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>login.jsp</welcome-file>

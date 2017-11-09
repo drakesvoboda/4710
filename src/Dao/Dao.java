@@ -1,9 +1,7 @@
 package Dao;
 
-
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +11,7 @@ import java.util.List;
 
 import MySqlAnnotations.*;
 
-
-public abstract class Dao <T, PK> implements IDao<T, PK> {
-	
-	
+public abstract class Dao <T, PK extends Serializable> implements IDao<T, PK> {
 	protected IMapper<T> mapper;
 	
 	protected Class<T> TYPE;
@@ -37,7 +32,11 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 		} 
 		catch(NullPointerException e)
 		{
-			System.out.println("Class " + TYPE.getName() + " must have the TableName annotation");
+			try {
+				throw new MySqlAnnotationNotFoundException("Class " + TYPE.getName() + " must have the TableName annotation");
+			} catch (MySqlAnnotationNotFoundException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 	
@@ -50,30 +49,31 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 
 	@Override
 	public T get(final PK key) {
-		try(Connection con = ConnectionManager.getConnection())
-		{
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		List<T> matches = select("SELECT * FROM " + TABLE_NAME + " WHERE " + pkSql(key));
+		
+		if(matches.size() > 0){
+			return matches.get(0);
 		}
 		
 		return null;
 	}
+	
+	public void update(final T entity) {	
+	
+	}
 
 	@Override
 	public void delete(final PK key) {
-		// TODO Auto-generated method stub
+		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(key));
 	}
 
 	@Override
 	public List<T> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return select("SELECT * FROM " + TABLE_NAME);
 	}
 	
 	@Override
-	public List<T> select(final String sql, final Object... args){
+	public List<T> select(final String sql, final Object... args){ 
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try(Connection connect = ConnectionManager.getConnection())
@@ -101,9 +101,10 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 	
 	@Override
 	public void update(final String sql, final Object... args){
+		PreparedStatement preparedStatement = null;
 		try(Connection connect = ConnectionManager.getConnection())
 		{		
-			PreparedStatement preparedStatement = createStatement(connect, sql, args);
+			preparedStatement = createStatement(connect, sql, args);
 		    
 		    preparedStatement.executeUpdate();	    
 		   
@@ -111,9 +112,10 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
+			ConnectionManager.close(preparedStatement);
 		}
 	}
+	
 	
 	private PreparedStatement createStatement(final Connection connect, final String sql, final Object... args) throws SQLException{
 		PreparedStatement preparedStatement;
@@ -125,5 +127,15 @@ public abstract class Dao <T, PK> implements IDao<T, PK> {
 	    }
 		
 		return preparedStatement;		
+	}
+	
+	private String pkSql(final PK key){
+		
+		return PRIMARY_KEY + " = " + key.toString();
+	}
+	
+	private String buildUpdateSql(final T entity){
+		
+		return "";
 	}
 }

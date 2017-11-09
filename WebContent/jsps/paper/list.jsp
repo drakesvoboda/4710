@@ -5,7 +5,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>top</title>
+    
+    <title>Login</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -16,25 +17,20 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-<style type="text/css">
-	body {
-		background: #4682B4; 
-	}
-	a {
-		text-transform:none;
-		text-decoration:none;
-	} 
-	a:hover {
-		text-decoration:underline;
-	}
-</style>
+
   </head>
   
   <body>
-<h1 style="text-align: center;">CSC4710</h1>
-<div style="font-size: 24pt;">
-	<a href="<c:url value='/InitDatabase'/>" target="_parent">Initialize Database</a> |&nbsp; 
-	<a href="<c:url value='/Paper/List'/>" target="_parent">View Papers</a>
-</div>
+  <h1>Select a Paper</h1>
+
+
+<p style="color: red; font-weight: 900"> Select a paper</p>
+
+
+    <c:forEach items="${Papers}" var="paper">
+	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>
+	</c:forEach>
+	
+
   </body>
 </html>
