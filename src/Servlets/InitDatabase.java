@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dao.ConnectionManager;
+import Models.Paper.Paper;
+import Models.Paper.PaperDao;
+import MySqlAnnotations.ColumnName;
 
 /**
  * Servlet implementation class UserServlet
@@ -46,17 +49,17 @@ public class InitDatabase extends HttpServlet {
 
 		String[] scanner = new String(
 				"DROP TABLE IF EXISTS Review, PCMember, Writes, Paper, Author;"
-						+ "CREATE TABLE Paper	(                                              "
+						+ "CREATE TABLE Paper	(                                          "
 						+ "	PaperID 	INTEGER AUTO_INCREMENT,                            "
 						+ "	Title 		VARCHAR(50),                                       "
 						+ "	Abstract 	VARCHAR(250),                                      "
 						+ "	Pdf 		VARCHAR(100),                                      "
 						+ "	PRIMARY KEY (PaperID)                                          "
-						+ ");																   "
+						+ ");															   "
 						+
 
 						"INSERT INTO Paper (Title, Abstract, Pdf)						   "
-						+ "VALUES ('Sample', 'Lorem Ipsum Dolor', 'Sample PDF');	    	   "
+						+ "VALUES ('Sample', 'Lorem Ipsum Dolor', 'Sample PDF');	       "
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 2', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
 						+
@@ -75,6 +78,7 @@ public class InitDatabase extends HttpServlet {
 						+ "	Affiliation VARCHAR(100),                                      "
 						+ "	PRIMARY KEY (email)                                            "
 						+ ");                                                              "
+
 						+ "CREATE TABLE Writes(                                            "
 						+ "	PaperID 	INTEGER,                                           "
 						+ "	Email 		VARCHAR(50),                                       "
@@ -83,20 +87,26 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               "
 						+ "	FOREIGN KEY (Email) REFERENCES Author(Email)                   "
 						+ ");                                                              "
+
 						+ "CREATE TABLE PCMember(                                          "
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	MemberName 	VARCHAR(20),                                       "
 						+ "	PRIMARY KEY (email)		                                       "
 						+ ");                                                              "
+
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
-						+ "VALUES ('john@test.com', 'John');	    	   "
+						+ "VALUES ('john@test.com', 'John');	    	   				   "
+
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
-						+ "VALUES ('joe@test.com', 'Joe');	    	   "
+						+ "VALUES ('joe@test.com', 'Joe');	    	   					   "
+
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
-						+ "VALUES ('james@test.com', 'James');	    	   "
+						+ "VALUES ('james@test.com', 'James');	    	   				   "
+
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
-						+ "VALUES ('jake@test.com', 'Jake');	    	   "
-						+ "CREATE TABLE Review(                                              "
+						+ "VALUES ('jake@test.com', 'Jake');	    	   				   "
+
+						+ "CREATE TABLE Review(                                            "
 						+ "	ReportID 	INTEGER AUTO_INCREMENT,                            "
 						+ "	SubDate 	DATE,                                              "
 						+ "	Comment		VARCHAR(250),                                      "
@@ -107,7 +117,7 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               "
 						+ "	FOREIGN KEY (Email) REFERENCES PCMember(Email),                "
 						+ "	UNIQUE (PaperID, Email)                                        "
-						+ ")                                                                 ")
+						+ ")                                                               ")
 				.split(";");
 
 		try (Connection connect = ConnectionManager.getConnection()) {
@@ -128,6 +138,20 @@ public class InitDatabase extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		PaperDao paperdao = new PaperDao();
+		
+		Paper paper = new Paper();
+		
+		paper.setTitle("test create");
+		
+		paper.setPaperAbstract("test create abst");
+		
+		paper.setPdf("test create pdf");
+		
+		paperdao.create(paper);
+		
+		
 
 	}
 }

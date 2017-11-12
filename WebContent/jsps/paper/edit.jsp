@@ -29,7 +29,7 @@
 		<input type="hidden" name="PaperId" value="${Paper.id }" /> 
 		<br> 
 		<label>Select Reviewers </label> 
-		<select name="reviewers" size="3" multiple="multiple">
+		<select name="reviewers" size="12" multiple="multiple">
 			<c:forEach items="${PCMembers}" var="member">
 				<option value="${member.email }">${member.memberName }</option>
 			</c:forEach>

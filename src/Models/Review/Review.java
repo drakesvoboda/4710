@@ -8,16 +8,24 @@ import MySqlAnnotations.*;
 public class Review {
 	
 	@PrimaryKey
+	@ColumnName("reportid")
 	public int ReportID;
 	
+	@ColumnName("subdate")
 	public Date SubDate;
+	
+	@ColumnName("comment")
 	public String Comment;
+	
+	@ColumnName("recommend")
 	public boolean Recommend;
 	
-	
-	@ForeignKey(ForeignColumn = "PaperID", ForeignTable = "paper")
+	@ColumnName("paperid")
+	@ForeignKey(ForeignColumn = "paperid", ForeignTable = "paper")
 	public int PaperID;
 	
+	@ColumnName("email")
+	@ForeignKey(ForeignColumn = "email", ForeignTable = "pcmember")
 	public String Email;
 	
 	public int getReportID() {

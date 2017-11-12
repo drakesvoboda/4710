@@ -4,7 +4,12 @@ import MySqlAnnotations.*;
 
 @TableName("PCMember")
 public class PCMember {
+	
+	@PrimaryKey
+	@ColumnName("email")
 	public String email;
+	
+	@ColumnName("membername")
 	public String memberName;
 
 	public String getEmail() {

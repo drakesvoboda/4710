@@ -4,9 +4,18 @@ import MySqlAnnotations.*;
 
 @TableName("paper")
 public class Paper {
+	
+	@PrimaryKey
+	@ColumnName("paperid")
 	public int id;
+	
+	@ColumnName("title")
 	public String title;
+	
+	@ColumnName("abstract")
 	public String paperAbstract;
+	
+	@ColumnName("pdf")
 	public String pdf;
 	
 	public int getId() {

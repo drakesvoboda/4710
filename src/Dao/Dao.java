@@ -1,7 +1,7 @@
 package Dao;
 
-import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,55 +11,98 @@ import java.util.List;
 
 import MySqlAnnotations.*;
 
-public abstract class Dao <T, PK extends Serializable> implements IDao<T, PK> {
+public abstract class Dao<T, PK> implements IDao<T, PK> {
 	protected IMapper<T> mapper;
-	
+
 	protected Class<T> TYPE;
+	protected Field PRIMARY_KEY;
+	protected List<Field> COLUMNS;
 	protected String TABLE_NAME;
-	protected String PRIMARY_KEY;
-	
-	public Dao(IMapper<T> mapper, Class<T> TYPE){
+
+	public Dao(IMapper<T> mapper, Class<T> TYPE) {
 		this.mapper = mapper;
-		
+
 		this.TYPE = TYPE;
-		
-		try
-		{
+
+		try {
 			Annotation annotation = TYPE.getAnnotation(TableName.class);
 			TableName tableName = (TableName) annotation;
-		
+
 			this.TABLE_NAME = tableName.value();
-		} 
-		catch(NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			try {
-				throw new MySqlAnnotationNotFoundException("Class " + TYPE.getName() + " must have the TableName annotation");
+				throw new MySqlAnnotationNotFoundException("Class "
+						+ TYPE.getName()
+						+ " must have the TableName annotation");
 			} catch (MySqlAnnotationNotFoundException e1) {
 				e1.printStackTrace();
 			}
 		}
+
+		this.COLUMNS = new ArrayList<Field>();
+
+		try {
+			for (Field field : TYPE.getDeclaredFields()) {
+				if (field.isAnnotationPresent(PrimaryKey.class)) {
+					PRIMARY_KEY = field;
+				}
+				if (field.isAnnotationPresent(ColumnName.class)) {
+					COLUMNS.add(field);
+				}
+			}
+			if (PRIMARY_KEY == null) {
+				throw new MySqlAnnotationNotFoundException(
+						"Class "
+								+ TYPE.getName()
+								+ " must have a field with the PrimaryKey flag annotation");
+			}
+		} catch (MySqlAnnotationNotFoundException e) {
+e.printStackTrace();
+		}
 	}
-	
 
 	@Override
-	public PK create(final T entity) {
+	public void create(final T entity) {
 		// TODO Auto-generated method stub
-		return null;
+		String columns = ""; //List of column names separated by commas
+		String valuesPlaceholder = "";	//List of ? separated by commas
+		List<Object> values = new ArrayList<Object>(); //List of objects to fill ?
+		
+		try {
+			for (Field field : this.COLUMNS) {
+
+				if (field.get(entity) != null) {
+					columns = columns.concat(field.getAnnotation(ColumnName.class).value() + ",");
+					valuesPlaceholder = valuesPlaceholder.concat("?,");
+					values.add(field.get(entity));
+				}
+
+			}
+			columns = columns.substring(0, columns.length() - 1); //Remove last comma
+			valuesPlaceholder = valuesPlaceholder.substring(0, valuesPlaceholder.length() - 1);	//Remove last comma
+			
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		update("INSERT INTO " + TABLE_NAME + " (" + columns + ") VALUES (" + valuesPlaceholder + ")", values.toArray(new Object[values.size()]));
 	}
 
 	@Override
 	public T get(final PK key) {
-		List<T> matches = select("SELECT * FROM " + TABLE_NAME + " WHERE " + pkSql(key));
-		
-		if(matches.size() > 0){
+		List<T> matches = select("SELECT * FROM " + TABLE_NAME + " WHERE "
+				+ pkSql(key));
+
+		if (matches.size() > 0) {
 			return matches.get(0);
 		}
-		
+
 		return null;
 	}
-	
-	public void update(final T entity) {	
-	
+
+	public void update(final T entity) {
+
 	}
 
 	@Override
@@ -71,71 +114,68 @@ public abstract class Dao <T, PK extends Serializable> implements IDao<T, PK> {
 	public List<T> getAll() {
 		return select("SELECT * FROM " + TABLE_NAME);
 	}
-	
+
 	@Override
-	public List<T> select(final String sql, final Object... args){ 
+	public List<T> select(final String sql, final Object... args) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		try(Connection connect = ConnectionManager.getConnection())
-		{		
+		try (Connection connect = ConnectionManager.getConnection()) {
 			preparedStatement = createStatement(connect, sql, args);
-		    
+
 			resultSet = preparedStatement.executeQuery();
-		    
-		    final List<T> ret = new ArrayList<T>();
-		    
-		    while(resultSet.next()){	  
-		    	ret.add(mapper.map(resultSet));
-		    }
-		    
-		    return ret;
-		    
+
+			final List<T> ret = new ArrayList<T>();
+
+			while (resultSet.next()) {
+				ret.add(mapper.map(resultSet));
+			}
+
+			return ret;
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			ConnectionManager.close(preparedStatement, resultSet);
 		}
 		return null;
 	}
-	
+
 	@Override
-	public void update(final String sql, final Object... args){
+	public int update(final String sql, final Object... args) {
 		PreparedStatement preparedStatement = null;
-		try(Connection connect = ConnectionManager.getConnection())
-		{		
+		int ret = -1;
+		try (Connection connect = ConnectionManager.getConnection()) {
 			preparedStatement = createStatement(connect, sql, args);
-		    
-		    preparedStatement.executeUpdate();	    
-		   
+
+			ret = preparedStatement.executeUpdate();
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			ConnectionManager.close(preparedStatement);
 		}
+		
+		return ret;
 	}
-	
-	
-	private PreparedStatement createStatement(final Connection connect, final String sql, final Object... args) throws SQLException{
+
+	private PreparedStatement createStatement(final Connection connect,
+			final String sql, final Object... args) throws SQLException {
 		PreparedStatement preparedStatement;
-		
-		preparedStatement = connect.prepareStatement(sql); 
-	    
-	    for(int i = 0; i < args.length; ++i){	    	
-	    	preparedStatement.setObject(i + 1, args[i]);
-	    }
-		
-		return preparedStatement;		
+
+		preparedStatement = connect.prepareStatement(sql);
+
+		for (int i = 0; i < args.length; ++i) {
+			preparedStatement.setObject(i + 1, args[i]);
+		}
+
+		return preparedStatement;
 	}
-	
-	private String pkSql(final PK key){
-		
-		return PRIMARY_KEY + " = " + key.toString();
-	}
-	
-	private String buildUpdateSql(final T entity){
-		
+
+	private String pkSql(final PK key) {
+
 		return "";
 	}
+
 }

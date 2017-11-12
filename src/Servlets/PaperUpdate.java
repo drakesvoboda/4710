@@ -15,6 +15,7 @@ import org.apache.catalina.tribes.util.Arrays;
 import user.domain.User;
 import Models.PCMember.PCMemberDao;
 import Models.Paper.PaperDao;
+import Models.Review.Review;
 import Models.Review.ReviewDao;
 
 
@@ -40,6 +41,19 @@ public class PaperUpdate extends HttpServlet {
 			info.add(values[0]);
 			System.out.println(name + ": " + Arrays.toString(values));
 		}
+		
+		ReviewDao reviewdao = new ReviewDao();
+		
+		String[] reviewers = paramMap.get("reviewers");
+		int paperId = Integer.parseInt(paramMap.get("PaperId")[0]);
+		
+		for(String email : reviewers){
+			Review review = new Review();
+			review.setEmail(email);
+			review.setPaperID(paperId);
+			reviewdao.create(review);
+		}
+		
 	}
 
 }

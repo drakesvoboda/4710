@@ -35,7 +35,7 @@ public class PaperEdit extends HttpServlet {
 		System.out.println(PK);
 		
 	
-		request.setAttribute("Paper", paperDao.select("SELECT * from Paper WHERE paperid = " + PK).get(0)); //Get the paper
+		request.setAttribute("Paper", paperDao.select("SELECT * from Paper WHERE paperid = ?", PK).get(0)); //Get the paper
 		
 		request.setAttribute("PCMembers", pcmemberDao.getAll()); //Get all the PCMembers
 			

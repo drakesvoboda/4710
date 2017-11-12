@@ -1,12 +1,11 @@
 package Dao;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface IDao <T, PK extends Serializable>{
-	PK create(T entity);
-	
+public interface IDao <T, PK>{
 	T get(PK key);
+	
+	void create(T entity);
 	
 	void update(T entity);
 	
@@ -16,5 +15,5 @@ public interface IDao <T, PK extends Serializable>{
 	
 	List<T> select(final String sql, final Object... args);
 	
-	void update(final String sql, final Object... args);
+	int update(final String sql, final Object... args);
 }

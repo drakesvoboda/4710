@@ -13,7 +13,7 @@ public class Writes {
 	
 	public int AuthorOrder;
 	
-	public static class WritesPK implements Serializable{
+	public static class WritesPK{
 		public String Email;
 		public int PaperId;
 	}
