@@ -33,14 +33,6 @@ public class PaperUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub	
 		Map<String,String[]> paramMap = request.getParameterMap();
-		List<String> info = new ArrayList<String>();
-		
-		for(String name : paramMap.keySet()) {
-			
-			String[] values = paramMap.get(name);
-			info.add(values[0]);
-			System.out.println(name + ": " + Arrays.toString(values));
-		}
 		
 		ReviewDao reviewdao = new ReviewDao();
 		
