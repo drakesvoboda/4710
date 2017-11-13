@@ -37,7 +37,7 @@ public class PaperEdit extends HttpServlet {
 	
 		request.setAttribute("Paper", paperDao.select("SELECT * from Paper WHERE paperid = ?", PK).get(0)); //Get the paper
 		
-		request.setAttribute("PCMembers", pcmemberDao.getAll()); //Get all the PCMembers
+		request.setAttribute("PCMembers", pcmemberDao.select("SELECT * FROM pcmember P WHERE 4 < (SELECT * FROM review R WHERE R.email = P.email)")); //Get all the PCMembers
 			
 		request.getRequestDispatcher("/jsps/paper/edit.jsp").forward(request, response);
 	}
