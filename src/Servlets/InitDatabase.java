@@ -182,15 +182,7 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               "
 						+ "	FOREIGN KEY (Email) REFERENCES PCMember(Email),                "
 						+ "	UNIQUE (PaperID, Email)                                        "
-						+ ");"
-						
-						+ " ALTER TABLE review"
-						+ " ADD CHECK (NOT EXISTS(" 
-						+ "		SELECT * FROM PCMember P"
-						+ "		WHERE 5 < ("
-						+ "			SELECT *" 
-						+ "			FROM Review R"
-						+ "     	WHERE R.Email = P.Email)));"
+						+ ");"						
 )
 				.split(";");
 
