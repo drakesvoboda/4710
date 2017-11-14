@@ -2,8 +2,14 @@
 
 Setup:
 
-Clone Repository
+Step 1. Open project in Eclipse Luna
 
-From eclipse, file > import > General > Existing Proects into Workspace
+Step 2. Navigate to the \WebContent\META-INF directory
 
-Select "Browser..." and navigate to parent folder of repository
+Step 3. Open context.xml
+
+Step 4. Ensure that the username and password fields match for your local MySql installation
+
+Step 5. Configure a Tomcat 7 server in eclipse
+
+Step 6. Run the \WebContent\jsps\main.jsp file on the Tomcat server
