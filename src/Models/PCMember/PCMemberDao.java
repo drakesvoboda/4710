@@ -2,6 +2,7 @@ package Models.PCMember;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import Dao.Dao;
 import Dao.IMapper;
@@ -24,5 +25,9 @@ public class PCMemberDao extends Dao<PCMember, String> {
 	public PCMemberDao() {
 		super(PCMEMBER_MAPPER, PCMember.class);
 	}		
+	
+	public List<PCMember> getReviewersForPaper(int PaperID){
+		return select("SELECT * FROM PCMember P WHERE P.email IN (SELECT email FROM review R WHERE R.PaperID = ?)", PaperID);
+	}
 
 }

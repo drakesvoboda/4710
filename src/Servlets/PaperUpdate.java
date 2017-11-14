@@ -46,6 +46,8 @@ public class PaperUpdate extends HttpServlet {
 			reviewdao.create(review);
 		}
 		
+		response.sendRedirect("/Demo/Paper/List");
+		
 	}
 
 }

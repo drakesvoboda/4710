@@ -33,6 +33,7 @@ public class PaperList extends HttpServlet {
 		
 			
 		request.getRequestDispatcher("/jsps/paper/list.jsp").forward(request, response);
+	
 	}
 
 }

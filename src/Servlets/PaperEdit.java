@@ -32,12 +32,12 @@ public class PaperEdit extends HttpServlet {
 		
 		String PK = request.getParameter("id"); //Get paperId from url
 		
-		System.out.println(PK);
-		
 	
 		request.setAttribute("Paper", paperDao.select("SELECT * from Paper WHERE paperid = ?", PK).get(0)); //Get the paper
 		
-		request.setAttribute("PCMembers", pcmemberDao.select("SELECT * FROM pcmember P WHERE 4 < (SELECT * FROM review R WHERE R.email = P.email)")); //Get all the PCMembers
+		request.setAttribute("Reviewers", pcmemberDao.getReviewersForPaper(Integer.parseInt(PK)));
+		
+		request.setAttribute("PCMembers", pcmemberDao.select("SELECT * FROM pcmember P WHERE 5 > (SELECT count(*) FROM review R WHERE R.email = P.email)")); //Get all the PCMembers
 			
 		request.getRequestDispatcher("/jsps/paper/edit.jsp").forward(request, response);
 	}
