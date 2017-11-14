@@ -1,5 +1,10 @@
 # 4710
 
+Contributors:
+
+Drake Svoboda | fv9838@wayne.edu | fv9838
+John Gettel   | gd3148@wayne.edu | gd3148
+
 Setup:
 
 Step 1. Open project in Eclipse Luna
