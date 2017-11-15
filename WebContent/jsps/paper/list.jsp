@@ -21,7 +21,7 @@
   </head>
   
   <body>
-  <h1>Select a Paper</h1>
+  <h1>Select a paper to add reviews to</h1>
 
 
 <p style="color: red; font-weight: 900"> Select a paper</p>

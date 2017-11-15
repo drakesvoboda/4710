@@ -125,8 +125,6 @@ public class InitDatabase extends HttpServlet {
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('don@author.com', 'Don', 'JSU');    	   "
 						
-						
-						
 						+ "CREATE TABLE Writes(                                            "
 						+ "	PaperID 	INTEGER,                                           "
 						+ "	Email 		VARCHAR(50),                                       "
@@ -136,6 +134,46 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (Email) REFERENCES Author(Email)                   "
 						+ ");                                                              "
 
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (1, 'don@author.com', 1);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (1, 'dan@author.com', 2);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (2, 'dan@author.com', 1);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (2, 'don@author.com', 2);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (2, 'damian@author.com', 3);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (3, 'damian@author.com', 1);    	   "
+						
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (4, 'debbie@author.com', 1);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (5, 'donna@author.com', 1);    	   "
+						
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (6, 'donovan@author.com', 1);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (7, 'dave@author.com', 1);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (8, 'donald@author.com', 1);    	   "
+						
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (9, 'david@author.com', 1);    	   "
+
+						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
+						+ "VALUES (10, 'drake@author.com', 1);    	   "
+
+						
 						+ "CREATE TABLE PCMember(                                          "
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	MemberName 	VARCHAR(20),                                       "
@@ -183,8 +221,54 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               "
 						+ "	FOREIGN KEY (Email) REFERENCES PCMember(Email),                "
 						+ "	UNIQUE (PaperID, Email)                                        "
-						+ ")"						
-)
+						+ ");"						
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 'joseph@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 'john@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 'jacob@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 'joseph@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 'john@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 'jacob@test.com');	 	   				   "
+				
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 'joseph@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 'john@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 6, 'jacob@test.com');	 	   				   "
+				
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 'joseph@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 8, 'john@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 'jacob@test.com');	 	   				   "
+				
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'joseph@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'james@test.com');	 	   				   "
+
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'jacob@test.com')	 	   				   "
+				
+				)
 				.split(";");
 
 
