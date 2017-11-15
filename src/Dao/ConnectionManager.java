@@ -20,7 +20,7 @@ public class ConnectionManager {
 		try {
 			InitialContext context = new InitialContext();
 			DataSource dataSource = (DataSource) context
-					.lookup("java:/comp/env/jdbc/sampledb");
+					.lookup("java:/comp/env/jdbc/testdb");
 
 			return dataSource.getConnection();
 		} catch (SQLException ex) {
