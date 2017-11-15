@@ -73,8 +73,6 @@ function validateForm(){
 
 				<button type="submit">Submit</button>
 			</form>
-			
-			<button onclick="validateForm()">test</button>
 		</c:otherwise>
 	</c:choose>
 

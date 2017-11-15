@@ -87,6 +87,7 @@ iframe {
 	</div>
 
 
+<img src="/WebContent/images/ERDiagram.png" />
 
 
 
