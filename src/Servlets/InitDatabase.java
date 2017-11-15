@@ -285,15 +285,21 @@ public class InitDatabase extends HttpServlet {
 					statement = null;
 				}
 			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally{
-			  response.setContentType("text/html");
+			
+			response.setContentType("text/html");
 			  PrintWriter out = response.getWriter();
 			  out.append("Success");
 			  out.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			response.setContentType("text/html");
+			  PrintWriter out = response.getWriter();
+			  out.append("Failed: " + e.getMessage());
+			  out.close();
+			e.printStackTrace();
+		} finally{
+			  
 		}
 	}
 }
