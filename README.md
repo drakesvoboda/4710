@@ -10,7 +10,11 @@ John Gettel   | gd3148@wayne.edu | gd3148
 
 Step 1. Import project from war into Eclipse Luna
 
+Step 1.1 Ensure JRE version is 1.8
+
 Step 2. Configure a Tomcat 7 server in Eclipse
+
+Step 2.2 Ensure Tomcat 7 library is on the projects build path
 
 Step 3. Run the \WebContent\jsps\main.jsp file on the Tomcat server
 
