@@ -18,22 +18,52 @@ public class PaperList extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request,response);
+		PaperDao paperDao = new PaperDao();
+
+		
+		request.setAttribute("Papers", paperDao.getAll()); //Get the paper
+		
+			
+		request.getRequestDispatcher("/jsps/paper/list.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		PaperDao paperDao = new PaperDao();
-
-	
-		request.setAttribute("Papers", paperDao.getAll()); //Get the paper
+		
+		String lastname = request.getParameter("lastname");
+		
+		request.setAttribute("lastname", lastname);
+		
+		System.out.print(paperDao.select(
+				"select * from paper where paperid in (select P.paperID " +
+				"from paper P, writes W, author A " +
+				"where A.AuthorName=? " + 
+				"	AND A.Email=W.Email " +
+				"   AND W.PaperID = P.PaperID " +
+				"	AND W.PaperID IN(select W.PaperID " +
+				"		from Writes W " +
+				"		Group By W.PaperID " +
+				"		having count(W.Email)=1)) ", lastname
+				));
+		
+		request.setAttribute("Papers", paperDao.select(
+				"select * from paper where paperid in (select P.paperID " +
+				"from paper P, writes W, author A " +
+				"where A.AuthorName=? " + 
+				"	AND A.Email=W.Email " +
+				"   AND W.PaperID = P.PaperID " +
+				"	AND W.PaperID IN(select W.PaperID " +
+				"		from Writes W " +
+				"		Group By W.PaperID " +
+				"		having count(W.Email)=1)) ", lastname
+				)); //Get the paper
 		
 			
 		request.getRequestDispatcher("/jsps/paper/list.jsp").forward(request, response);
-	
 	}
 
 }

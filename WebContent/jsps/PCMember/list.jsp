@@ -26,12 +26,6 @@
 
 <p style="color: red; font-weight: 900"> Select a paper</p>
 
-	<form action="<c:url value='/Paper/List'/>" method="post">
-		<label for="lastname">Filter by author's last name</label>
-		<input name="lastname" type="text" value="${lastname}" />
-		
-		<button type="submit">GO</button>
-	</form>
 
     <c:forEach items="${Papers}" var="paper">
 	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>

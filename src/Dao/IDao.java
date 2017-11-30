@@ -9,7 +9,7 @@ public interface IDao <T, PK>{
 	
 	void update(T entity);
 	
-	void delete(PK key);	
+	void delete(T entity);	
 	
 	List<T> getAll();
 	

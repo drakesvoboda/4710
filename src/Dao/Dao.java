@@ -15,7 +15,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 	protected IMapper<T> mapper;
 
 	protected Class<T> TYPE;
-	protected Field PRIMARY_KEY;
+	protected List<Field> PRIMARY_KEY;
 	protected List<Field> COLUMNS;
 	protected String TABLE_NAME;
 
@@ -40,11 +40,12 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 		}
 
 		this.COLUMNS = new ArrayList<Field>();
-
+		this.PRIMARY_KEY = new ArrayList<Field>();
+		
 		try {
 			for (Field field : TYPE.getDeclaredFields()) {
 				if (field.isAnnotationPresent(PrimaryKey.class)) {
-					PRIMARY_KEY = field;
+					PRIMARY_KEY.add(field);
 				}
 				if (field.isAnnotationPresent(ColumnName.class)) {
 					COLUMNS.add(field);
@@ -57,7 +58,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 								+ " must have a field with the PrimaryKey flag annotation");
 			}
 		} catch (MySqlAnnotationNotFoundException e) {
-e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -92,7 +93,7 @@ e.printStackTrace();
 	@Override
 	public T get(final PK key) {
 		List<T> matches = select("SELECT * FROM " + TABLE_NAME + " WHERE "
-				+ pkSql(key));
+				+ pkSql());
 
 		if (matches.size() > 0) {
 			return matches.get(0);
@@ -102,12 +103,25 @@ e.printStackTrace();
 	}
 
 	public void update(final T entity) {
-
+		String SET_STATEMENT = "";
+		
+		update("UPDATE " + TABLE_NAME + " SET " + SET_STATEMENT + " WHERE " + pkSql());
 	}
 
 	@Override
-	public void delete(final PK key) {
-		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(key));
+	public void delete(final T entity) {
+		List<Object> values = new ArrayList<Object>(); //List of objects to fill ?
+		try {
+			for (Field field : this.PRIMARY_KEY) {		
+				if (field.get(entity) != null) {
+					values.add(field.get(entity));
+				}			
+			}
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
+		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(), values.toArray(new Object[values.size()]));
 	}
 
 	@Override
@@ -173,9 +187,16 @@ e.printStackTrace();
 		return preparedStatement;
 	}
 
-	private String pkSql(final PK key) {
+	private String pkSql() {
+		String ret = "";
+		for(Field field : PRIMARY_KEY){
+					
+					String column_name = field.getAnnotation(ColumnName.class).value();
+					ret = ret.concat(column_name + " = ? AND ");
+			
 
-		return "";
+		}
+		return ret.substring(0, ret.length() - 5); //Remove last AND;
 	}
 
 }

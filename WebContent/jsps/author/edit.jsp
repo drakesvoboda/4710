@@ -70,18 +70,11 @@ function validateForm(){
 						<option value="${member.email }">${member.memberName }</option>
 					</c:forEach>
 				</select><br>
-				
+
+				<button type="submit">Submit</button>
 			</form>
 		</c:otherwise>
 	</c:choose>
-	
-		<input type="text" name="title" value="${Paper.title}" />
-				
-				<textarea name="title">${Paper.paperAbstract}</textarea>
-				
-				<textarea name="title">${Paper.pdf}</textarea>
-
-				<button type="submit">Submit</button> <button type="submit" value="delete">Delete</button>
 
 
 
