@@ -81,6 +81,28 @@
     <servlet-name>PaperEdit</servlet-name>
     <url-pattern>/Paper/Edit</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>PCMemberList</display-name>
+    <servlet-name>PCMemberList</servlet-name>
+    <servlet-class>Servlets.PCMemberList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PCMemberList</servlet-name>
+    <url-pattern>/PCMember/List</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>PCMemberEdit</display-name>
+    <servlet-name>PCMemberEdit</servlet-name>
+    <servlet-class>Servlets.PCMemeberEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PCMemberEdit</servlet-name>
+    <url-pattern>/PCMember/Edit</url-pattern>
+  </servlet-mapping>
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

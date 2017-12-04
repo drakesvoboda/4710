@@ -38,18 +38,6 @@ public class PaperList extends HttpServlet {
 		
 		request.setAttribute("lastname", lastname);
 		
-		System.out.print(paperDao.select(
-				"select * from paper where paperid in (select P.paperID " +
-				"from paper P, writes W, author A " +
-				"where A.AuthorName=? " + 
-				"	AND A.Email=W.Email " +
-				"   AND W.PaperID = P.PaperID " +
-				"	AND W.PaperID IN(select W.PaperID " +
-				"		from Writes W " +
-				"		Group By W.PaperID " +
-				"		having count(W.Email)=1)) ", lastname
-				));
-		
 		request.setAttribute("Papers", paperDao.select(
 				"select * from paper where paperid in (select P.paperID " +
 				"from paper P, writes W, author A " +

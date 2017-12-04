@@ -82,8 +82,12 @@ iframe {
 	<div style="font-size: 24pt;">
 		<button onclick="javascript:InitDatabase()" target="_blank">Initialize
 			Database</button>
-		|&nbsp; <a href="<c:url value='/Paper/List'/>" target="_parent">View
+		&nbsp; <a href="<c:url value='/Paper/List'/>" target="_parent">View
 			Papers</a>
+		|&nbsp; <a href="<c:url value='/PCMember/List'/>" target="_parent">View
+			PC Members</a>
+		|&nbsp; <a href="<c:url value='/Review/List'/>" target="_parent">View
+			Reviews</a>
 	</div>
 
 
