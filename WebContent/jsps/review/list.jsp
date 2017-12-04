@@ -21,14 +21,14 @@
   </head>
   
   <body>
-  <h1>Select a paper to add reviews to</h1>
+  <h1>Select Review</h1>
 
 
-<p style="color: red; font-weight: 900"> Select a paper</p>
+<p style="color: red; font-weight: 900"> Select a Review</p>
 
 
-    <c:forEach items="${Papers}" var="paper">
-	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>
+    <c:forEach items="${Reviews}" var="Review">
+	  <a href="/Demo/Review/Edit?ReportID=${review.ReportID }">${review.ReportID }</a> <br>
 	</c:forEach>
 	
 

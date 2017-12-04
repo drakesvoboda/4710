@@ -21,13 +21,13 @@
   </head>
   
   <body>
-  <h1>Select a paper to add reviews to</h1>
+  <h1>Select a PC Member</h1>
 
 
-<p style="color: red; font-weight: 900"> Select a paper</p>
+<p style="color: red; font-weight: 900"> Select a PC Member</p>
 
-    <c:forEach items="${PCMember}" var="PCMembers">
-	  <a href="/Demo/PCMember/Edit?id=${PCMember.email }">${PCMember.memberName}</a> <br>
+    <c:forEach items="${PCMembers}" var="PCMember">
+	  <a href="/Demo/PCMember/Edit?email=${PCMember.email}">${PCMember.memberName}</a> <br>
 	</c:forEach>
 	
 
