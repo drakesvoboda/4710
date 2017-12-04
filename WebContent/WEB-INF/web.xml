@@ -103,6 +103,30 @@
     <servlet-name>PCMemberEdit</servlet-name>
     <url-pattern>/PCMember/Edit</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>ReviewList</display-name>
+    <servlet-name>ReviewList</servlet-name>
+    <servlet-class>Servlets.ReviewList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewList</servlet-name>
+    <url-pattern>/Review/List</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ReviewEdit</display-name>
+    <servlet-name>ReviewEdit</servlet-name>
+    <servlet-class>Servlets.ReviewEdit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReviewEdit</servlet-name>
+    <url-pattern>/Review/Edit</url-pattern>
+  </servlet-mapping>
+
+
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

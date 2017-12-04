@@ -70,3 +70,11 @@ Where R.Recommend='T'
 	AND P.paperID=R.PaperID
 Group by P.paperID
 having count(*)>1)
+
+#All people who wrote paper
+Select *
+From paper P, writes W, author A
+Where P.PaperID=2
+	AND P.PaperID=W.PaperID
+    AND W.email=A.email
+	Order by W.authorOrder asc;
