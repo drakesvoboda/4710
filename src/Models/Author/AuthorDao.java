@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import Models.Author.Author;
+import Models.Writes.Writes;
 import Dao.Dao;
 import Dao.IMapper;
 
@@ -30,6 +31,12 @@ public class AuthorDao extends Dao<Author, String> {
 	
 	public List<Author> getAuthorByName(String authorName){	
 		return select("SELECT * FROM Author WHERE authorname = ?", authorName);
+	}
+	
+	public List<Author> getAuthorsForPaper(int paperId){
+		return select("Select * From writes W, author A Where W.PaperID=? AND W.email=A.email Order by W.authorOrder asc", paperId);		
+	
+		
 	}
 
 }

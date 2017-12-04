@@ -138,20 +138,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 
 	@Override
 	public void delete(final T entity) {
-		List<Object> values = new ArrayList<Object>(); // List of objects to
-														// fill ?
-		try {
-			for (Field field : this.PRIMARY_KEY) {
-				if (field.get(entity) != null) {
-					values.add(field.get(entity));
-				}
-			}
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-
-		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity),
-				values.toArray(new Object[values.size()]));
+		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity));
 	}
 
 	@Override

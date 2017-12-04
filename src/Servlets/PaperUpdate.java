@@ -14,9 +14,11 @@ import org.apache.catalina.tribes.util.Arrays;
 
 import user.domain.User;
 import Models.PCMember.PCMemberDao;
+import Models.Paper.Paper;
 import Models.Paper.PaperDao;
 import Models.Review.Review;
 import Models.Review.ReviewDao;
+import Models.Writes.WritesDao;
 
 
 public class PaperUpdate extends HttpServlet {
@@ -31,22 +33,7 @@ public class PaperUpdate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub	
-		Map<String,String[]> paramMap = request.getParameterMap();
 		
-		ReviewDao reviewdao = new ReviewDao();
-		
-		String[] reviewers = paramMap.get("reviewers");
-		int paperId = Integer.parseInt(paramMap.get("PaperId")[0]);
-		
-		for(String email : reviewers){
-			Review review = new Review();
-			review.setEmail(email);
-			review.setPaperID(paperId);
-			reviewdao.create(review);
-		}
-		
-		response.sendRedirect("/Demo/Paper/List");
 		
 	}
 

@@ -2,10 +2,10 @@ package Models.Writes;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import Models.Writes.Writes;
 import Models.Writes.Writes.WritesPK;
-
 import Dao.Dao;
 import Dao.IMapper;
 
@@ -27,4 +27,5 @@ public class WritesDao extends Dao<Writes, WritesPK> {
 	public WritesDao() {
 		super(WRITES_MAPPER, Writes.class);
 	}	
+	
 }

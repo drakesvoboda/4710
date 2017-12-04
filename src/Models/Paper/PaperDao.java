@@ -22,8 +22,7 @@ public class PaperDao extends Dao<Paper, Integer> {
 			return paper;			
 		}
 	};
-	
-	
+		
 	public PaperDao() {
 		super(PAPER_MAPPER, Paper.class);
 	}		

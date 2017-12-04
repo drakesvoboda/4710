@@ -130,8 +130,8 @@ public class InitDatabase extends HttpServlet {
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	AuthorOrder INTEGER,                                           "
 						+ "	PRIMARY KEY (PaperID, Email),                                  "
-						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               "
-						+ "	FOREIGN KEY (Email) REFERENCES Author(Email)                   "
+						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID) ON DELETE CASCADE,               "
+						+ "	FOREIGN KEY (Email) REFERENCES Author(Email) ON DELETE CASCADE                  "
 						+ ");                                                              "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
@@ -218,8 +218,8 @@ public class InitDatabase extends HttpServlet {
 						+ "	PaperID 	INTEGER,                                           "
 						+ "	Email 		VARCHAR(100),                                      "
 						+ " PRIMARY KEY (ReportID),										   "
-						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID),               "
-						+ "	FOREIGN KEY (Email) REFERENCES PCMember(Email),                "
+						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID) ON DELETE CASCADE,               "
+						+ "	FOREIGN KEY (Email) REFERENCES PCMember(Email) ON DELETE CASCADE,                "
 						+ "	UNIQUE (PaperID, Email)                                        "
 						+ ");"						
 

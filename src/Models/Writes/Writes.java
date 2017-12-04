@@ -4,13 +4,16 @@ import java.io.Serializable;
 
 import MySqlAnnotations.*;
 
+@TableName("writes")
 public class Writes {
 	
 	@PrimaryKey
+	@ColumnName("paperid")
 	public int PaperId;
 	@PrimaryKey
+	@ColumnName("email")
 	public String Email;
-	
+	@ColumnName("authororder")
 	public int AuthorOrder;
 	
 	public static class WritesPK{
