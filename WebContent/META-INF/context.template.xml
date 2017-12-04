@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/Demo">
-<Resource name="jdbc/testdb" auth="Container"
-type="javax.sql.DataSource" username="root" password="gbiB51316wsu"
+<Resource name="jdbc/sampledb" auth="Container"
+type="javax.sql.DataSource" username="john" password="pass1234"
 driverClassName="com.mysql.jdbc.Driver"
 url="jdbc:mysql://127.0.0.1:3306/testdb"
 maxActive="8" maxIdle="4"/>

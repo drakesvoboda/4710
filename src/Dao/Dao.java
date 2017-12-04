@@ -41,7 +41,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 
 		this.COLUMNS = new ArrayList<Field>();
 		this.PRIMARY_KEY = new ArrayList<Field>();
-		
+
 		try {
 			for (Field field : TYPE.getDeclaredFields()) {
 				if (field.isAnnotationPresent(PrimaryKey.class)) {
@@ -65,35 +65,41 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 	@Override
 	public void create(final T entity) {
 		// TODO Auto-generated method stub
-		String columns = ""; //List of column names separated by commas
-		String valuesPlaceholder = "";	//List of ? separated by commas
-		List<Object> values = new ArrayList<Object>(); //List of objects to fill ?
-		
+		String columns = ""; // List of column names separated by commas
+		String valuesPlaceholder = ""; // List of ? separated by commas
+		List<Object> values = new ArrayList<Object>(); // List of objects to
+														// fill ?
+
 		try {
 			for (Field field : this.COLUMNS) {
 
 				if (field.get(entity) != null) {
-					columns = columns.concat(field.getAnnotation(ColumnName.class).value() + ",");
+					columns = columns.concat(field.getAnnotation(
+							ColumnName.class).value()
+							+ ",");
 					valuesPlaceholder = valuesPlaceholder.concat("?,");
 					values.add(field.get(entity));
 				}
 
 			}
-			columns = columns.substring(0, columns.length() - 1); //Remove last comma
-			valuesPlaceholder = valuesPlaceholder.substring(0, valuesPlaceholder.length() - 1);	//Remove last comma
-			
+			columns = columns.substring(0, columns.length() - 1); // Remove last
+																	// comma
+			valuesPlaceholder = valuesPlaceholder.substring(0,
+					valuesPlaceholder.length() - 1); // Remove last comma
+
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		update("INSERT INTO " + TABLE_NAME + " (" + columns + ") VALUES (" + valuesPlaceholder + ")", values.toArray(new Object[values.size()]));
+		update("INSERT INTO " + TABLE_NAME + " (" + columns + ") VALUES ("
+				+ valuesPlaceholder + ")",
+				values.toArray(new Object[values.size()]));
 	}
 
 	@Override
 	public T get(final PK key) {
-		List<T> matches = select("SELECT * FROM " + TABLE_NAME + " WHERE "
-				+ pkSql());
+		List<T> matches = select("SELECT * FROM " + TABLE_NAME + " WHERE ");
 
 		if (matches.size() > 0) {
 			return matches.get(0);
@@ -105,23 +111,47 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 	public void update(final T entity) {
 		String SET_STATEMENT = "";
 		
-		update("UPDATE " + TABLE_NAME + " SET " + SET_STATEMENT + " WHERE " + pkSql());
+		List<Object> values = new ArrayList<Object>(); // List of objects to
+														// fill ?
+
+		try {
+			for (Field field : this.COLUMNS) {
+				if (field.get(entity) != null) {
+					SET_STATEMENT = SET_STATEMENT.concat(field.getAnnotation(
+							ColumnName.class).value() + " = ?,");
+					values.add(field.get(entity));
+				}
+
+			}
+			SET_STATEMENT = SET_STATEMENT.substring(0,
+					SET_STATEMENT.length() - 1); // Remove last comma
+
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		update("UPDATE " + TABLE_NAME + " SET " + SET_STATEMENT + " WHERE "
+				+ pkSql(entity), values.toArray(new Object[values.size()]));
 	}
 
 	@Override
 	public void delete(final T entity) {
-		List<Object> values = new ArrayList<Object>(); //List of objects to fill ?
+		List<Object> values = new ArrayList<Object>(); // List of objects to
+														// fill ?
 		try {
-			for (Field field : this.PRIMARY_KEY) {		
+			for (Field field : this.PRIMARY_KEY) {
 				if (field.get(entity) != null) {
 					values.add(field.get(entity));
-				}			
+				}
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		
-		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(), values.toArray(new Object[values.size()]));
+
+		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity),
+				values.toArray(new Object[values.size()]));
 	}
 
 	@Override
@@ -170,7 +200,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 		} finally {
 			ConnectionManager.close(preparedStatement);
 		}
-		
+
 		return ret;
 	}
 
@@ -187,16 +217,22 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 		return preparedStatement;
 	}
 
-	private String pkSql() {
+	private String pkSql(final T entity) {
 		String ret = "";
-		for(Field field : PRIMARY_KEY){
-					
-					String column_name = field.getAnnotation(ColumnName.class).value();
-					ret = ret.concat(column_name + " = ? AND ");
-			
-
+		try {
+			for (Field field : PRIMARY_KEY) {
+				if (field.get(entity) != null) {
+					String column_name = field.getAnnotation(ColumnName.class)
+							.value();
+					ret = ret.concat(column_name + " = " + field.get(entity)
+							+ " AND ");
+				}
+			}
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
 		}
-		return ret.substring(0, ret.length() - 5); //Remove last AND;
+
+		return ret.substring(0, ret.length() - 5); // Remove last AND;
 	}
 
 }
