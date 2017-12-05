@@ -25,6 +25,10 @@
 	
 	<form action="<c:url value='/PCMember/Edit'/>"	onsubmit="return validateForm(this)" method="post">
 		
+				<c:if test="${ !isNew }">
+			<input type="hidden" name="id" value="${PCMember.id }" />
+		</c:if>
+		
 		<label>PC Member Name</label> <br>
 		<input type="text" name="membername" value="${PCMember.memberName}" /><br><br>
 

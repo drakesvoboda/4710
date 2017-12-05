@@ -28,6 +28,8 @@ public class PCMemberEdit extends HttpServlet {
 		PCMemberDao pcmemberDao = new PCMemberDao();
 		
 		String PK = request.getParameter("email"); //Get pcmember email from url		
+		
+		request.setAttribute("isNew", false);
 	
 		request.setAttribute("PCMember", pcmemberDao.select("SELECT * from PCMember WHERE email = ?", PK).get(0)); //Get the paper
 		
@@ -46,6 +48,7 @@ public class PCMemberEdit extends HttpServlet {
 			
 		pcmember.setEmail(paramMap.get("email")[0]);
 		pcmember.setMemberName(paramMap.get("membername")[0]);
+		pcmember.setId(Integer.parseInt(paramMap.get("id")[0]));
 		
 		String submit = paramMap.get("submit")[0];
 		
