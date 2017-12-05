@@ -175,9 +175,11 @@ public class InitDatabase extends HttpServlet {
 
 						
 						+ "CREATE TABLE PCMember(                                          "
+						+ "	ID			INTEGER	AUTO_INCREMENT,							   "                                        
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	MemberName 	VARCHAR(20),                                       "
-						+ "	PRIMARY KEY (email)		                                       "
+						+ "	PRIMARY KEY (ID),		                                       "
+						+ " UNIQUE (Email)                                                 "
 						+ ");                                                              "
 
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
