@@ -88,10 +88,11 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (Email) REFERENCES Author(Email)                   "
 						+ ");                                                              "
 
-						+ "CREATE TABLE PCMember(                                          "
+						+ "CREATE TABLE PCMember(  
+						+ "	ID			INTEGER	AUTO_INCREMENT							   "                                        "
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	MemberName 	VARCHAR(20),                                       "
-						+ "	PRIMARY KEY (email)		                                       "
+						+ "	PRIMARY KEY (ID)		                                       "
 						+ ");                                                              "
 
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
