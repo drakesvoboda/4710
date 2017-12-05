@@ -18,7 +18,7 @@ where A.AuthorName="Dan"
     AND W.AuthorOrder=1;
 
 #6 NOT DONE
-select *
+select distinct *
 from paper P, author A1, author A2, writes W1, writes W2
 where P.PaperID=W1.PaperID
 	AND A1.AuthorName="Dan"

@@ -50,14 +50,11 @@ public class PaperDao extends Dao<Paper, Integer> {
 	}
 	
 	public List<Paper> getPapersByTwoAuthors(String authorname1, String authorname2){
-		return select(
-				"select * "
-						+ "from paper P, author A1, author A2, writes W1, writes W2 "
-						+ "where P.PaperID=W1.PaperID "
-						+ "AND A1.AuthorName=? "
-						+ "AND A2.AuthorName=? "
-						+ "AND A1.email=W1.email "
-						+ "AND A2.email=W2.email", authorname1,
-						authorname2);
+		return select( "SELECT * FROM paper WHERE paperid IN "
+				+ " (SELECT w.paperid FROM writes w, author a WHERE w.email = a.email AND a.authorname = ?) "
+				+ " AND paperid IN "
+				+ " (SELECT w.paperid FROM writes w, author a WHERE w.email = a.email AND a.authorname = ?) "
+				, authorname1,
+				authorname2);
 	}
 }

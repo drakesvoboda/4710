@@ -29,9 +29,7 @@
 			<h1>New Paper</h1>
 		</c:otherwise>
 	</c:choose>
-
-
-
+	
 	<script>
 		function validateForm(form) {
 			if (form.submited == "delete") {
