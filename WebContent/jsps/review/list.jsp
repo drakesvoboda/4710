@@ -27,8 +27,8 @@
 <p style="color: red; font-weight: 900"> Select a Review</p>
 
 
-    <c:forEach items="${Reviews}" var="Review">
-	  <a href="/Demo/Review/Edit?ReportID=${review.ReportID }">${review.ReportID }</a> <br>
+    <c:forEach items="${Reviews,}" var="Review">
+	  <a href="/Demo/Review/Edit?reportID=${Review.reportID }">${Review.reportID }</a> <br>
 	</c:forEach>
 	
 

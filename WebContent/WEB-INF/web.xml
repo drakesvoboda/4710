@@ -97,7 +97,7 @@
     <description></description>
     <display-name>PCMemberEdit</display-name>
     <servlet-name>PCMemberEdit</servlet-name>
-    <servlet-class>Servlets.PCMemeberEdit</servlet-class>
+    <servlet-class>Servlets.PCMemberEdit</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>PCMemberEdit</servlet-name>
@@ -126,8 +126,6 @@
     <url-pattern>/Review/Edit</url-pattern>
   </servlet-mapping>
 
-
-  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>login.jsp</welcome-file>
