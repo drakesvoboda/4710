@@ -140,6 +140,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 
 	@Override
 	public void delete(final T entity) {
+		System.out.println("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity));
 		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity));
 	}
 
