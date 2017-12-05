@@ -8,7 +8,7 @@ import Dao.Dao;
 import Dao.IMapper;
 import Models.PCMember.PCMember;
 
-public class PCMemberDao extends Dao<PCMember, String> {
+public class PCMemberDao extends Dao<PCMember, Integer> {
 	
 	private static IMapper<PCMember> PCMEMBER_MAPPER = new IMapper<PCMember>(){
 		@Override
@@ -17,6 +17,7 @@ public class PCMemberDao extends Dao<PCMember, String> {
 			
 			pcMember.setEmail(resultSet.getString("email"));
 			pcMember.setMemberName(resultSet.getString("memberName"));
+			pcMember.setId(Integer.parseInt(resultSet.getString("id")));
 			
 			return pcMember;			
 		}

@@ -6,6 +6,9 @@ import MySqlAnnotations.*;
 public class PCMember {
 	
 	@PrimaryKey
+	@ColumnName("id")
+	public int id;
+	
 	@ColumnName("email")
 	public String email;
 	
@@ -17,6 +20,12 @@ public class PCMember {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getMemberName() {
 		return memberName;

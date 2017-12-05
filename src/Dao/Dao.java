@@ -134,6 +134,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 			e.printStackTrace();
 		}
 
+		System.out.println("UPDATE " + TABLE_NAME + " SET " + SET_STATEMENT + " WHERE " + pkSql(entity));
 		update("UPDATE " + TABLE_NAME + " SET " + SET_STATEMENT + " WHERE "
 				+ pkSql(entity), values.toArray(new Object[values.size()]));
 	}

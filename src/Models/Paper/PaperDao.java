@@ -46,7 +46,7 @@ public class PaperDao extends Dao<Paper, Integer> {
 						+ "   AND W.PaperID = P.PaperID "
 						+ "	AND W.PaperID IN(select W.PaperID "
 						+ "		from Writes W " + "		Group By W.PaperID "
-						+ "		having count(W.Email)=1)) ", authorname)
+						+ "		having count(W.Email)=1)) ", authorname);
 	}
 	
 	public List<Paper> getPapersByTwoAuthors(String authorname1, String authorname2){
@@ -58,6 +58,6 @@ public class PaperDao extends Dao<Paper, Integer> {
 						+ "AND A2.AuthorName=? "
 						+ "AND A1.email=W1.email "
 						+ "AND A2.email=W2.email", authorname1,
-						authorname2)
+						authorname2);
 	}
 }
