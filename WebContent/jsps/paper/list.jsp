@@ -27,13 +27,36 @@
 <p style="color: red; font-weight: 900"> Select a paper</p>
 
 	<form action="<c:url value='/Paper/List'/>" method="post">
-		<label for="lastname">Filter by author's last name</label>
-		<input name="lastname" type="text" value="${lastname}" />
+		<label for="lastname">Search for papers by:</label>
 		
+		<input name="lastname" type="text" value="${lastname}" /> and
+		
+		<input name="lastname2" type="text" value="${lastname2}" />
+		
+		<br>
+		
+		<label for="contactChoice1"><input <c:if test='{type=="singleauthor"}'>checked</c:if> type="radio"
+     name="type" value="singleauthor">
+    Single Author</label>
+<br>
+   <label for="contactChoice2"> <input <c:if test='{type=="firstauthor"}'>checked</c:if> type="radio"
+     name="type" value="firstauthor">
+    First Author</label>
+<br>
+    <label for="contactChoice3"> <input <c:if test='{type=="twoauthors"}'>checked</c:if> type="radio"
+     name="type" value="twoauthors">
+   Multiple Authors</label>
+		<br>
 		<button type="submit">GO</button>
 	</form>
 
     <c:forEach items="${Papers}" var="paper">
+	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>
+	</c:forEach>
+	<a href="/Demo/Paper/Edit">+ Create a paper</a> <br>
+	
+	<h3>Recommended Papers</h3>
+	    <c:forEach items="${recommended_papers}" var="paper">
 	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>
 	</c:forEach>
 	

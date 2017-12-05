@@ -49,7 +49,7 @@ public class InitDatabase extends HttpServlet {
 		Statement statement = null;
 
 		String[] scanner = new String(
-				"DROP TABLE IF EXISTS Review, PCMember, Writes, Paper, Author;"
+				"DROP TABLE IF EXISTS Review, PCMember, Writes, Paper, Author;DROP VIEW IF EXISTS recommended_papers;"
 						+ "CREATE TABLE Paper	(                                          "
 						+ "	PaperID 	INTEGER AUTO_INCREMENT,                            "
 						+ "	Title 		VARCHAR(50),                                       "
@@ -266,7 +266,18 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'james@test.com');	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'jacob@test.com')	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'jacob@test.com');	 	   				   "
+						
+						+ " CREATE VIEW recommended_papers AS "
+						+ " Select * "
+						+ " from paper "
+						+ " Where paperID IN "
+						+ " (select P.paperID "
+						+ " from paper P, review R "
+						+ " Where R.Recommend='T' "
+						+ " AND P.paperID=R.PaperID "
+						+ " Group by P.paperID "
+						+ " having count(*)>1) "
 				
 				)
 				.split(";");

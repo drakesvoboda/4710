@@ -21,15 +21,23 @@
 </head>
 
 <body>
-	<h1>Edit Paper : ${Paper.title }</h1>
+	<c:choose>
+		<c:when test="${ !isNew }">
+			<h1>Edit Paper : ${Paper.title }</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>New Paper</h1>
+		</c:otherwise>
+	</c:choose>
+
 
 
 	<script>
 		function validateForm(form) {
-			if(form.submited == "delete"){
-				return true;		
-			}			
-			
+			if (form.submited == "delete") {
+				return true;
+			}
+
 			var reviewSelect = document.getElementById("review_select");
 
 			var options = reviewSelect.options;
@@ -50,28 +58,35 @@
 			}
 		}
 	</script>
-	<form action="<c:url value='/Paper/Edit'/>"	onsubmit="return validateForm(this)" method="post">
-		<input type="hidden" name="PaperId" value="${Paper.id }" />
-		
-		<label>Paper Title</label> <br>
-		<input type="text" name="title" value="${Paper.title}" /><br><br>
+	<form action="<c:url value='/Paper/Edit'/>"
+		onsubmit="return validateForm(this)" method="post">
 
-		<label>Abstract</label><br>
-		<textarea name="abstract">${Paper.paperAbstract}</textarea><br><br>
+		<c:if test="${ !isNew }">
+			<input type="hidden" name="PaperId" value="${Paper.id }" />
+		</c:if>
 
-		<label>PDF</label><br>
-		<textarea name="pdf">${Paper.pdf}</textarea><br><br>
-		
+		<label>Paper Title</label> <br> <input type="text" name="title"
+			value="${Paper.title}" /><br>
+		<br> <label>Abstract</label><br>
+		<textarea name="abstract">${Paper.paperAbstract}</textarea>
+		<br>
+		<br> <label>PDF</label><br>
+		<textarea name="pdf">${Paper.pdf}</textarea>
+		<br>
+		<br>
+<c:if test="${ !isNew }">
 		<c:if test="${ Authors.size() > 0 }">
-				<h4>Authors <small>In Order</small></h4>
-				<ul>
-					<c:forEach items="${Authors}" var="author">
-						<li>${author.getAuthorName() }</li>
-					</c:forEach>
-				</ul>
+			<h4>
+				Authors <small>In Order</small>
+			</h4>
+			<ul>
+				<c:forEach items="${Authors}" var="author">
+					<li>${author.getAuthorName() }</li>
+				</c:forEach>
+			</ul>
 
-			</c:if>
-		
+		</c:if>
+
 		<c:choose>
 			<c:when test="${ Reviewers.size() > 0 }">
 				<h4>Assigned Reviewers</h4>
@@ -98,10 +113,14 @@
 
 			</c:otherwise>
 		</c:choose>
-		
 
-		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
-		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+</c:if>
+		<input onclick="this.form.submited=this.value;" type="submit"
+			name="submit" value="update" />
+		<c:if test="${ !isNew }">
+			<input onclick="this.form.submited=this.value;" type="submit"
+				name="submit" value="delete" />
+		</c:if>
 	</form>
 
 

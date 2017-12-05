@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,9 +93,10 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 			e.printStackTrace();
 		}
 
-		update("INSERT INTO " + TABLE_NAME + " (" + columns + ") VALUES ("
-				+ valuesPlaceholder + ")",
+		update("INSERT INTO " + TABLE_NAME + " (" + columns
+				+ ") VALUES (" + valuesPlaceholder + ")",
 				values.toArray(new Object[values.size()]));
+
 	}
 
 	@Override
@@ -110,7 +112,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 
 	public void update(final T entity) {
 		String SET_STATEMENT = "";
-		
+
 		List<Object> values = new ArrayList<Object>(); // List of objects to
 														// fill ?
 
@@ -118,7 +120,8 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 			for (Field field : this.COLUMNS) {
 				if (field.get(entity) != null) {
 					SET_STATEMENT = SET_STATEMENT.concat(field.getAnnotation(
-							ColumnName.class).value() + " = ?,");
+							ColumnName.class).value()
+							+ " = ?,");
 					values.add(field.get(entity));
 				}
 
@@ -130,7 +133,6 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 		update("UPDATE " + TABLE_NAME + " SET " + SET_STATEMENT + " WHERE "
 				+ pkSql(entity), values.toArray(new Object[values.size()]));
@@ -211,8 +213,14 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 				if (field.get(entity) != null) {
 					String column_name = field.getAnnotation(ColumnName.class)
 							.value();
-					ret = ret.concat(column_name + " = " + field.get(entity)
-							+ " AND ");
+					if(field.getType() == String.class){
+						ret = ret.concat(column_name + " = '" + field.get(entity)
+								+ "' AND ");
+					}else{
+						ret = ret.concat(column_name + " = " + field.get(entity)
+								+ " AND ");
+					}
+					
 				}
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
