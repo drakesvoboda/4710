@@ -64,7 +64,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 	}
 
 	@Override
-	public void create(final T entity) {
+	public int create(final T entity) {
 		// TODO Auto-generated method stub
 		String columns = ""; // List of column names separated by commas
 		String valuesPlaceholder = ""; // List of ? separated by commas
@@ -93,7 +93,7 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 			e.printStackTrace();
 		}
 
-		update("INSERT INTO " + TABLE_NAME + " (" + columns
+		return update("INSERT INTO " + TABLE_NAME + " (" + columns
 				+ ") VALUES (" + valuesPlaceholder + ")",
 				values.toArray(new Object[values.size()]));
 
@@ -140,7 +140,6 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 
 	@Override
 	public void delete(final T entity) {
-		System.out.println("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity));
 		update("DELETE FROM " + TABLE_NAME + " WHERE " + pkSql(entity));
 	}
 
@@ -178,17 +177,23 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 	@Override
 	public int update(final String sql, final Object... args) {
 		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
 		int ret = -1;
 		try (Connection connect = ConnectionManager.getConnection()) {
-			preparedStatement = createStatement(connect, sql, args);
+			preparedStatement = createStatementReturnKeys(connect, sql, args);
 
-			ret = preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
+			rs = preparedStatement.getGeneratedKeys();
+			
+			while(rs.next()){
+				ret = rs.getInt(1);
+			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			ConnectionManager.close(preparedStatement);
+			ConnectionManager.close(preparedStatement, rs);
 		}
 
 		return ret;
@@ -199,6 +204,19 @@ public abstract class Dao<T, PK> implements IDao<T, PK> {
 		PreparedStatement preparedStatement;
 
 		preparedStatement = connect.prepareStatement(sql);
+
+		for (int i = 0; i < args.length; ++i) {
+			preparedStatement.setObject(i + 1, args[i]);
+		}
+
+		return preparedStatement;
+	}
+	
+	private PreparedStatement createStatementReturnKeys(final Connection connect,
+			final String sql, final Object... args) throws SQLException {
+		PreparedStatement preparedStatement;
+
+		preparedStatement = connect.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 		for (int i = 0; i < args.length; ++i) {
 			preparedStatement.setObject(i + 1, args[i]);
