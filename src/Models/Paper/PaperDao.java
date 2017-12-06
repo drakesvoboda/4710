@@ -47,7 +47,7 @@ public class PaperDao extends Dao<Paper, Integer> {
 	
 	public List<Paper> getPapersByFirstAuthor(String authorname){
 		return select(
-				"select * from paper P, writes W, author A where A.AuthorName=? AND A.Email=W.Email AND W.PaperID=P.PaperID AND W.AuthorOrder=1",
+				"select * from paper P, writes W, author A where A.AuthorName=? AND A.Email=W.Email AND W.PaperID=P.PaperID AND W.AuthorOrder=0",
 				authorname);
 	}
 	
