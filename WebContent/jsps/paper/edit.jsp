@@ -104,7 +104,7 @@
 					<div id="author-view" style="margin-left: 150px;"></div>
 				</div>
 			</c:if>
-			<br><br>
+			<br>
 			<c:choose>
 				<c:when test="${ Reviewers.size() > 0 }">
 					<h4>Assigned Reviewers</h4>
