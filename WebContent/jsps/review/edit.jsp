@@ -54,6 +54,13 @@
 		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
 		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
 		
+		<select id="replacementPCMember" name="replacementPCMember" size="12">
+			<c:forEach items="${PCMembers}" var="member">
+				<option value="${member.id }">${member.memberName }</option>
+			</c:forEach>
+		</select>
+		
+
 	</form>
 
 </body>
