@@ -49,7 +49,8 @@ public class InitDatabase extends HttpServlet {
 		Statement statement = null;
 
 		String[] scanner = new String(
-				"DROP TABLE IF EXISTS Review, PCMember, Writes, Paper, Author;DROP VIEW IF EXISTS recommended_papers;"
+				"DROP TABLE IF EXISTS Review, PCMember, Writes, Paper, Author;"
+				+ "DROP VIEW IF EXISTS recommended_papers;"
 						+ "CREATE TABLE Paper	(                                          "
 						+ "	PaperID 	INTEGER AUTO_INCREMENT,                            "
 						+ "	Title 		VARCHAR(50),                                       "
