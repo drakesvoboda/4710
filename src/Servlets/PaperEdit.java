@@ -15,6 +15,7 @@ import Models.Paper.Paper;
 import Models.Paper.PaperDao;
 import Models.Review.Review;
 import Models.Review.ReviewDao;
+import Models.Writes.Writes;
 import Models.Writes.WritesDao;
 
 public class PaperEdit extends HttpServlet {
@@ -101,6 +102,21 @@ public class PaperEdit extends HttpServlet {
 						review.setPaperID(paperId);
 						reviewdao.create(review);
 					}
+				}
+				
+				int i = 0;
+				while(paramMap.containsKey("author[" + i + "]")){
+					Writes writes = new Writes();
+					
+					String author = paramMap.get("author[" + i + "]")[0];
+					
+					writes.setAuthorOrder(i);
+					writes.setEmail(author);
+					writes.setPaperId(paperId);
+					
+					writesdao.create(writes);
+					
+					++i;
 				}
 
 				paperdao.update(paper);
