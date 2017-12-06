@@ -53,8 +53,7 @@ public class PaperEdit extends HttpServlet {
 
 		request.setAttribute(
 				"PCMembers",
-				pcmemberDao
-						.select("SELECT * FROM pcmember P WHERE 5 > (SELECT count(*) FROM review R WHERE R.pcmemberid = P.pcmemberid)")); // Get
+				pcmemberDao.getPCMemberElegableForReview()); // Get
 																																// all
 		request.setAttribute("AuthorsToSelect", authordao.getAll());																										// the
 																																// PCMembers

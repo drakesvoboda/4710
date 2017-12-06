@@ -47,7 +47,9 @@ public class ReviewEdit extends HttpServlet {
 					"Review",
 					reviewDao.select("SELECT * from Review WHERE reviewID = ?", PK)
 							.get(0)); // Get the paper
-
+			
+			PCMemberDao pcmemberDao = new PCMemberDao();
+			request.setAttribute("ReplacementsOnDelete", pcmemberDao.getPCMemberElegableForReview());
 		}
 
 					

@@ -21,9 +21,6 @@
 </head>
 
 <body>
-<a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
-<hr>
-
 	<c:choose>
 		<c:when test="${ !isNew }">
 			<h1>Edit PC Member : ${PCMember.memberName }</h1>
