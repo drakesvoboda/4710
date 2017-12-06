@@ -74,7 +74,13 @@ public class ReviewEdit extends HttpServlet {
  		review.setRecommend(paramMap.containsKey("recommend"));
 		review.setSubDate(new Date());
 		
-		reviewdao.update(review);
+		String submit = paramMap.get("submit")[0];
+		
+		if(submit.equals("delete")){	
+			reviewdao.delete(review);
+		}else{	
+			reviewdao.update(review);
+		}		
 		
 		response.sendRedirect("/Demo/Review/List");
 	}

@@ -52,7 +52,8 @@
 		<textarea name="comments">${Review.getComment() }</textarea><br><br>
 		
 		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
-				
+		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+		
 	</form>
 
 </body>

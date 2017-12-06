@@ -226,49 +226,49 @@ public class InitDatabase extends HttpServlet {
 						+ ");"						
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 1);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 2, 1);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 2);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 2, 2);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 3);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 2, 3);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 1);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 4, 1);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 2);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 4, 2);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 3);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 4, 3);	 	   				   "
 				
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 1);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 6, 1);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 3); 	   				       "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 6, 3); 	   				       "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 6, 2);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 6, 2);	 	   				   "
 				
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 1);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 1);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 8, 2);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 2);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 3);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 8, 3);	 	   				   "
 				
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 1);	 	   			   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 1);	 	   			   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 2);	 	   			   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 2);	 	   			   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 3);	 	   			   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 3);	 	   			   "
 						
 						+ " CREATE VIEW recommended_papers AS "
 						+ " Select * "
@@ -276,7 +276,7 @@ public class InitDatabase extends HttpServlet {
 						+ " Where paperID IN "
 						+ " (select P.paperID "
 						+ " from paper P, review R "
-						+ " Where R.Recommend='T' "
+						+ " Where R.Recommend='1' "
 						+ " AND P.paperID=R.PaperID "
 						+ " Group by P.paperID "
 						+ " having count(*)>1) "
