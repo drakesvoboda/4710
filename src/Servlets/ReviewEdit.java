@@ -50,10 +50,8 @@ public class ReviewEdit extends HttpServlet {
 							.get(0)); // Get the paper
 			
 			PCMemberDao pcmemberDao = new PCMemberDao();
-			request.setAttribute("ReplacementsOnDelete", pcmemberDao.getPCMemberElegableForReview());
-		}
-
-		
+			request.setAttribute("ReplacementsForDelete", pcmemberDao.getPCMemberElegableForReview());
+		}		
 		
 		request.getRequestDispatcher("/jsps/review/edit.jsp").forward(request, response);	
 	}
@@ -78,8 +76,13 @@ public class ReviewEdit extends HttpServlet {
 		
 		String submit = paramMap.get("submit")[0];
 		
-		if(submit.equals("delete")){	
+		if(submit.equals("delete")){
+			String replacementPCMember = paramMap.get("replacementPCMember")[0];
+			Review replacement = new Review();
+			replacement.setPaperID(review.getPaperID());
+			replacement.setPCMemberId(Integer.parseInt(replacementPCMember));		
 			reviewdao.delete(review);
+			reviewdao.create(replacement);
 		}else{	
 			reviewdao.update(review);
 		}		
