@@ -70,12 +70,13 @@
 	<a href="/Demo/Paper/Edit">+ Create a paper</a>
 	<br>
 
+<c:if test="${recommended_papers != null}">
 	<h3>Recommended Papers</h3>
 	<c:forEach items="${recommended_papers}" var="paper">
 		<a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a>
 		<br>
 	</c:forEach>
-
+</c:if>
 	<script>
 	var app = (function() {
 		var multiple = document.getElementById("multiple-authors");	

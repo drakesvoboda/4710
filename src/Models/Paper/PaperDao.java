@@ -32,6 +32,19 @@ public class PaperDao extends Dao<Paper, Integer> {
 		return select("SELECT * FROM recommended_papers");		
 	}
 	
+	public List<Paper> getPapersRejectedBy(String member1, String member2){
+		return select("select * "
+						+"from review R1,review R2, paper P, pcmember PC1, pcmember PC2 "
+						+"where R1.Recommend='F' "
+						+"AND R2.Recommend='F' "
+						+"AND PC1.MemberName=? "
+						+"AND PC2.MemberName=? "
+								+"AND R1.PaperID=R2.PaperID "
+								+"AND R1.pcmemberid=PC1.pcmemberid "
+								+"AND R2.pcmemberid=PC2.pcmemberid "
+								+"AND P.PaperID=R1.PaperID AND R1.reviewid != R2.reviewid", member1, member2);		
+	}
+	
 	public List<Paper> getPapersByFirstAuthor(String authorname){
 		return select(
 				"select * from paper P, writes W, author A where A.AuthorName=? AND A.Email=W.Email AND W.PaperID=P.PaperID AND W.AuthorOrder=1",

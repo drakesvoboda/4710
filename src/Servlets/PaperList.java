@@ -19,6 +19,7 @@ public class PaperList extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PaperDao paperDao = new PaperDao();
+
 		AuthorDao authorDao = new AuthorDao();
 
 		request.setAttribute("Papers", paperDao.getAll()); // Get the paper

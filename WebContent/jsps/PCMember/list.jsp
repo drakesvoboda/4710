@@ -21,6 +21,29 @@
   </head>
   
   <body>
+
+<form onsubmit="return app.validateForm(this)" action="<c:url value='/PCMember/List'/>" method="post">
+		<label>Search for papers rejected by:</label> 
+		<select name="lastname" id="lastname">
+			<c:forEach items="${PCMembers}" var="PCMember">
+				<option value="${PCMember.memberName}">${PCMember.memberName}</option>
+			</c:forEach>
+		</select>
+	
+		and 
+		<select name="lastname2" id="lastname2">
+			<c:forEach items="${PCMembers}" var="PCMember">
+				<option value="${PCMember.memberName}">${PCMember.memberName}</option>
+			</c:forEach>
+		</select>
+	
+		<br>
+		 
+		
+		<button type="submit">GO</button>
+	</form>
+
+
   <h1>Select a PC Member</h1>
 
 
@@ -43,5 +66,24 @@
 	  <a href="/Demo/PCMember/Edit?email=${PCMember.email}">${PCMember.memberName}</a> <br>
 	</c:forEach>
 
+
+<script>
+	var app = (function() {
+		
+		return{
+			validateForm: function(form) {		
+				
+				var lastname = document.getElementById("lastname");
+				var lastname2 = document.getElementById("lastname2");
+				
+				if(lastname.value == lastname2.value ){
+					alert("The two PC Members must be different")
+					return false;			
+				}
+			}
+		}
+		
+		})();
+</script>
   </body>
 </html>
