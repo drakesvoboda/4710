@@ -24,10 +24,37 @@
 <a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
 <hr>
 
-	<h1>Edit Review : ${Review.id }</h1>
+	<h1>Complete Review : ${Review.id }</h1>
 
+	
 
+	<form action="<c:url value='/Review/Edit'/>" onsubmit="return validateForm(this)" method="post">
+		
+	<input type="hidden" name="reviewid" value="${Review.id }" />
+	<input type="hidden" name="paperid" value="${Review.getPaperID() }" />
+	<input type="hidden" name="pcmemberid" value="${Review.getPCMemberId() }" />
+	
 
+	<label>Submitted: </label>${Review.getSubDate() }<br><br>	
+	
+	<label>Recommend? </label>
+		<c:choose>
+            <c:when test="${Review.isRecommend()==true}">
+            	<input type="checkbox" name="recommend" checked/>
+            </c:when>
+            <c:otherwise>
+            	<input type="checkbox" name="recommend"/>
+            </c:otherwise>
+        </c:choose>
+		<br><br>
+		
+		<label>Review Comments: </label> <br>
+		<textarea name="comments">${Review.getComment() }</textarea><br><br>
+		
+		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
+		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+		
+	</form>
 
 </body>
 </html>

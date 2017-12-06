@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,9 +36,7 @@ public class ReviewEdit extends HttpServlet {
 
 		ReviewDao reviewDao = new ReviewDao();
 		String PK = request.getParameter("reviewID"); //Get pcmember email from url		
-		
-		System.out.print(PK);
-	
+			
 		if (PK == null) {
 			request.setAttribute("isNew", true);
 			request.setAttribute("Review", new Review()); // Get the paper
@@ -45,14 +46,15 @@ public class ReviewEdit extends HttpServlet {
 			request.setAttribute("isNew", false);
 			request.setAttribute(
 					"Review",
-					reviewDao.select("SELECT * from Review WHERE reviewID = ?", PK)
+					reviewDao.select("SELECT * from Review WHERE reviewID = ?", Integer.parseInt(PK))
 							.get(0)); // Get the paper
 			
 			PCMemberDao pcmemberDao = new PCMemberDao();
 			request.setAttribute("ReplacementsOnDelete", pcmemberDao.getPCMemberElegableForReview());
 		}
 
-					
+		
+		
 		request.getRequestDispatcher("/jsps/review/edit.jsp").forward(request, response);	
 	}
 
@@ -63,22 +65,25 @@ public class ReviewEdit extends HttpServlet {
 		
 		Map<String,String[]> paramMap = request.getParameterMap();	
 		
-		PCMemberDao pcmemberdao = new PCMemberDao();		
-		PCMember pcmember = new PCMember();
+		ReviewDao reviewdao = new ReviewDao();		
+		Review review = new Review();
 			
-		pcmember.setEmail(paramMap.get("email")[0]);
-		pcmember.setMemberName(paramMap.get("membername")[0]);
-		pcmember.setId(Integer.parseInt(paramMap.get("id")[0]));
+		review.setId(Integer.parseInt(paramMap.get("reviewid")[0]));
+		review.setPaperID(Integer.parseInt(paramMap.get("paperid")[0]));
+		review.setPCMemberId(Integer.parseInt(paramMap.get("pcmemberid")[0]));
+		review.setComment(paramMap.get("comments")[0]);
+		
+ 		review.setRecommend(paramMap.containsKey("recommend"));
+		review.setSubDate(new Date());
 		
 		String submit = paramMap.get("submit")[0];
 		
 		if(submit.equals("delete")){	
-			pcmemberdao.delete(pcmember);
+			reviewdao.delete(review);
 		}else{	
-			pcmemberdao.update(pcmember);
+			reviewdao.update(review);
 		}		
 		
 		response.sendRedirect("/Demo/Review/List");
 	}
-
 }
