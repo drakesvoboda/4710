@@ -21,60 +21,11 @@
 </head>
 
 <body>
-	<h1>Edit Paper : ${Paper.title }</h1>
+<a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
+<hr>
 
+	<h1>Edit Review : ${Review.id }</h1>
 
-<script>
-
-function validateForm(){
-	var reviewSelect = document.getElementById("review_select");
-	
-	var options = reviewSelect.options;
-	
-	var count = 0;
-	
-	for(var i = 0, len = options.length; i < len; ++i){
-		if(options[i].selected) {
-			++count;
-		}
-	}
-	
-	if (count != 3) {
-        alert("Must select exactly 3 reviewers");
-        return false;
-    }else{
-    	return true;
-    }
-}
-
-</script>
-
-	<c:choose>
-		<c:when test="${ Reviewers.size() > 0 }">
-			<h4>Assigned Reviewers</h4>
-			<ul>
-				<c:forEach items="${Reviewers}" var="member">
-					<li>${member.memberName }</li>
-				</c:forEach>
-			</ul>
-
-		</c:when>
-		<c:otherwise>
-			<form action="<c:url value='/Paper/Update'/>" onsubmit="return validateForm()"  method="post">
-				<input type="hidden" name="PaperId" value="${Paper.id }" /> <br>
-				<label>Select Reviewers </label> <br> 
-				
-				<select id="review_select" name="reviewers"
-					size="12" multiple="multiple">
-					<c:forEach items="${PCMembers}" var="member">
-						<option value="${member.email }">${member.memberName }</option>
-					</c:forEach>
-				</select><br>
-
-				<button type="submit">Submit</button>
-			</form>
-		</c:otherwise>
-	</c:choose>
 
 
 

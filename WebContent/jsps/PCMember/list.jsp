@@ -21,6 +21,8 @@
   </head>
   
   <body>
+  <a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
+<hr>
 
 <form onsubmit="return app.validateForm(this)" action="<c:url value='/PCMember/List'/>" method="post">
 		<label>Search for papers rejected by:</label> 
@@ -43,6 +45,9 @@
 		<button type="submit">GO</button>
 	</form>
 
+
+
+  
 
   <h1>Select a PC Member</h1>
 
