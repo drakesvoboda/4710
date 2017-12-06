@@ -21,14 +21,17 @@
   </head>
   
   <body>
+  <a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
+<hr>
+  
   <h1>Select Review</h1>
 
 
 <p style="color: red; font-weight: 900"> Select a Review</p>
 
 
-    <c:forEach items="${Reviews,}" var="Review">
-	  <a href="/Demo/Review/Edit?reportID=${Review.reportID }">${Review.reportID }</a> <br>
+    <c:forEach items="${Reviews}" var="Review">
+	  <a href="/Demo/Review/Edit?reviewID=${Review[0] }">${Review[1]} reviewed by ${Review[2] }</a> <br>
 	</c:forEach>
 	
 

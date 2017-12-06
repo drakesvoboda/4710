@@ -21,6 +21,9 @@
   </head>
   
   <body>
+  <a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
+<hr>
+  
   <h1>Select a PC Member</h1>
 
 

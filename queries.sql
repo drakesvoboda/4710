@@ -78,3 +78,10 @@ Where P.PaperID=2
 	AND P.PaperID=W.PaperID
     AND W.email=A.email
 	Order by W.authorOrder asc;
+	
+#Information for Review display
+select R.ReportID, P.Title, PC.MemberName 
+From paper P, review R, pcmember PC
+Where P.PaperID=R.PaperID
+	AND R.Email=PC.Email
+    AND R.ReportID=3;

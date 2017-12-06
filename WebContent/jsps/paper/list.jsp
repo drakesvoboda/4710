@@ -22,6 +22,9 @@
 
 <body>
 
+<a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
+<hr>
+
 <c:if test="${authors != null}">
 <form onsubmit="return app.validateForm(this)" action="<c:url value='/Paper/List'/>" method="post">
 		<label>Search for papers by:</label> 
