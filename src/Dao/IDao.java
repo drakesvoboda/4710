@@ -5,7 +5,7 @@ import java.util.List;
 public interface IDao <T, PK>{
 	T get(PK key);
 	
-	void create(T entity);
+	int create(T entity);
 	
 	void update(T entity);
 	

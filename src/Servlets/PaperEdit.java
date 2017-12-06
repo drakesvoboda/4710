@@ -77,11 +77,12 @@ public class PaperEdit extends HttpServlet {
 		paper.setPaperAbstract(paramMap.get("abstract")[0]);
 		paper.setPdf(paramMap.get("pdf")[0]);
 		paper.setTitle(paramMap.get("title")[0]);
-
+		int paperId = -1;
 		if (!paramMap.containsKey("PaperId")) {
-			paperdao.create(paper);
+			paperId = paperdao.create(paper);
 		} else {
-			int paperId = Integer.parseInt(paramMap.get("PaperId")[0]);
+			paperId = Integer.parseInt(paramMap.get("PaperId")[0]);
+		}
 			paper.setId(paperId);
 
 			String submit = paramMap.get("submit")[0];
@@ -120,7 +121,7 @@ public class PaperEdit extends HttpServlet {
 
 				paperdao.update(paper);
 			}
-		}
+		
 
 		response.sendRedirect("/Demo/Paper/List");
 	}

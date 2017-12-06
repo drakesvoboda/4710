@@ -44,13 +44,14 @@ public class ReviewEdit extends HttpServlet {
 
 		} else {
 			request.setAttribute("isNew", false);
+			Review review = reviewDao.select("SELECT * from Review WHERE reviewID = ?", Integer.parseInt(PK)).get(0);
 			request.setAttribute(
 					"Review",
-					reviewDao.select("SELECT * from Review WHERE reviewID = ?", Integer.parseInt(PK))
-							.get(0)); // Get the paper
+					review
+							); // Get the paper
 			
 			PCMemberDao pcmemberDao = new PCMemberDao();
-			request.setAttribute("ReplacementsForDelete", pcmemberDao.getPCMemberElegableForReview());
+			request.setAttribute("ReplacementsForDelete", pcmemberDao.getPCMemberElegableForReviewWhoIsNotAlreadyReviewingPaper(review.PaperID));
 		}		
 		
 		request.getRequestDispatcher("/jsps/review/edit.jsp").forward(request, response);	

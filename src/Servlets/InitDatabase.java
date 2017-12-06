@@ -100,7 +100,7 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES ('drake@author.com', 'Drake', 'ASU');    	   "
 						
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
-						+ "VALUES ('david@author.com', 'David', 'BSU');    	   "
+						+ "VALUES ('denise@author.com', 'Denise', 'BSU');    	   "
 						
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('donald@author.com', 'Donald', 'CSU');    	   "
@@ -136,43 +136,43 @@ public class InitDatabase extends HttpServlet {
 						+ ");                                                              "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (1, 'don@author.com', 1);    	   "
+						+ "VALUES (1, 'don@author.com', 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (1, 'dan@author.com', 2);    	   "
+						+ "VALUES (1, 'dan@author.com', 1);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (2, 'dan@author.com', 1);    	   "
+						+ "VALUES (2, 'dan@author.com', 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (2, 'don@author.com', 2);    	   "
+						+ "VALUES (2, 'don@author.com', 1);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (2, 'damian@author.com', 3);    	   "
+						+ "VALUES (2, 'damian@author.com', 2);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (3, 'damian@author.com', 1);    	   "
+						+ "VALUES (3, 'damian@author.com', 0);    	   "
 						
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (4, 'debbie@author.com', 1);    	   "
+						+ "VALUES (4, 'debbie@author.com', 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (5, 'donna@author.com', 1);    	   "
+						+ "VALUES (5, 'donna@author.com', 0);    	   "
 						
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (6, 'donovan@author.com', 1);    	   "
+						+ "VALUES (6, 'donovan@author.com', 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (7, 'dave@author.com', 1);    	   "
+						+ "VALUES (7, 'dave@author.com', 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (8, 'donald@author.com', 1);    	   "
+						+ "VALUES (8, 'donald@author.com', 0);    	   "
 						
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (9, 'david@author.com', 1);    	   "
+						+ "VALUES (9, 'denise@author.com', 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (10, 'drake@author.com', 1);    	   "
+						+ "VALUES (10, 'drake@author.com', 0);    	   "
 
 						
 						+ "CREATE TABLE PCMember(                                          "

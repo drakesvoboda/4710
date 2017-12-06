@@ -53,6 +53,13 @@
 		
 		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
 		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+		<br>
+		<label>Each paper must have 3 reviews. If you intend to delete this review, select a PC Member to write a replacement review</label>
+		<select id="review_select" name="replacementPCMember">
+						<c:forEach items="${ReplacementsForDelete}" var="member">
+							<option value="${member.id }">${member.memberName }</option>
+						</c:forEach>
+					</select>
 		
 	</form>
 

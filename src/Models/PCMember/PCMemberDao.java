@@ -43,4 +43,8 @@ public class PCMemberDao extends Dao<PCMember, Integer> {
 		return select("SELECT * FROM pcmember P WHERE 5 > (SELECT count(*) FROM review R WHERE R.pcmemberid = P.pcmemberid)");	
 	}
 
+	public List<PCMember> getPCMemberElegableForReviewWhoIsNotAlreadyReviewingPaper(int paperid){
+		return select("SELECT * FROM pcmember P WHERE 5 > (SELECT count(*) FROM review R WHERE R.pcmemberid = P.pcmemberid) AND pcmemberid NOT IN (SELECT pcmemberid FROM review WHERE paperid = ?)", paperid);	
+	}
+	
 }
