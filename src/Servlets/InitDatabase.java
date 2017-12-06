@@ -175,10 +175,10 @@ public class InitDatabase extends HttpServlet {
 
 						
 						+ "CREATE TABLE PCMember(                                          "
-						+ "	ID			INTEGER	AUTO_INCREMENT,							   "                                        
+						+ "	PCMemberID	INTEGER	AUTO_INCREMENT,							   "                                        
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	MemberName 	VARCHAR(20),                                       "
-						+ "	PRIMARY KEY (ID),		                                       "
+						+ "	PRIMARY KEY (PCMemberID),		                                       "
 						+ " UNIQUE (Email)                                                 "
 						+ ");                                                              "
 
@@ -213,62 +213,62 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES ('joseph@test.com', 'Joseph');	 	   				   "
 
 						+ "CREATE TABLE Review(                                            "
-						+ "	ReportID 	INTEGER AUTO_INCREMENT,                            "
+						+ "	ReviewId 	INTEGER AUTO_INCREMENT,                            "
 						+ "	SubDate 	DATE,                                              "
 						+ "	Comment		VARCHAR(250),                                      "
 						+ "	Recommend	CHAR(1),                                           "
 						+ "	PaperID 	INTEGER,                                           "
-						+ "	Email 		VARCHAR(100),                                      "
-						+ " PRIMARY KEY (ReportID),										   "
+						+ "	PCMemberID 	INTEGER,                                      		"
+						+ " PRIMARY KEY (reviewid),										   "
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID) ON DELETE CASCADE,               "
-						+ "	FOREIGN KEY (Email) REFERENCES PCMember(Email) ON DELETE CASCADE,                "
-						+ "	UNIQUE (PaperID, Email)                                        "
+						+ "	FOREIGN KEY (PCMemberID) REFERENCES PCMember(PCMemberID) ON DELETE CASCADE,                "
+						+ "	UNIQUE (PaperID, PCMemberID)                                        "
 						+ ");"						
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 'joseph@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 1);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 'john@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 2);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 'jacob@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 2, 3);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 'joseph@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 1);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 'john@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 2);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 'jacob@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 4, 3);	 	   				   "
 				
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 'joseph@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 1);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 'john@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 6, 3); 	   				       "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 6, 'jacob@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 6, 2);	 	   				   "
 				
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 'joseph@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 1);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 8, 'john@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 8, 2);	 	   				   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 'jacob@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'F', 8, 3);	 	   				   "
 				
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'joseph@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 1);	 	   			   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'james@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 2);	 	   			   "
 
-						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, Email)						   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 'jacob@test.com');	 	   				   "
+						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', 'T', 10, 3);	 	   			   "
 						
 						+ " CREATE VIEW recommended_papers AS "
 						+ " Select * "

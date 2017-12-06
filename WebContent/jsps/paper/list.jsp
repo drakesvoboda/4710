@@ -30,7 +30,7 @@
 				<option value="${author.getAuthorName()}">${author.getAuthorName()}</option>
 			</c:forEach>
 		</select>
-		<span id="second-author" style="display: none">
+		<span id="second-author">
 		and 
 		<select name="lastname2" id="lastname2">
 			<c:forEach items="${authors}" var="author">
@@ -42,17 +42,17 @@
 		 
 		
 		<label>
-			<input type="radio" name="type" value="singleauthor" checked onclick="app.toggleSecondAuthor()"> Single Author
+			<input type="radio" name="type" value="singleauthor" checked onchange="app.toggleSecondAuthor()"> Single Author
 		</label> 
 		<br> 
 		
 		<label> 
-			<input type="radio" name="type" value="firstauthor" onclick="app.toggleSecondAuthor()"> First Author
+			<input type="radio" name="type" value="firstauthor" onchange="app.toggleSecondAuthor()"> First Author
 		</label> 
 		<br> 
 		
 		<label> 
-			<input type="radio" name="type" value="twoauthors" id="multiple-authors" onclick="app.toggleSecondAuthor()"> Multiple Authors
+			<input type="radio" name="type" value="twoauthors" id="multiple-authors" onchange="app.toggleSecondAuthor()"> Multiple Authors
 		</label> 
 		<br>
 		<button type="submit">GO</button>

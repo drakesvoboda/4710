@@ -13,12 +13,12 @@ public class ReviewDao extends Dao<Review, String> {
 		public Review map(ResultSet resultSet) throws SQLException{
 			Review review = new Review();
 						
-			review.setReportID(resultSet.getInt("reportid"));
+			review.setId(resultSet.getInt("reviewid"));
 			review.setSubDate(resultSet.getDate("subdate"));
 			review.setComment(resultSet.getString("comment"));
 			review.setRecommend(resultSet.getBoolean("recommend"));
 			review.setPaperID(resultSet.getInt("paperid"));
-			review.setEmail(resultSet.getString("email"));
+			review.setPCMemberId(resultSet.getInt("pcmemberid"));
 			
 			return review;			
 		}

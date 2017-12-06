@@ -21,12 +21,20 @@
 </head>
 
 <body>
-	<h1>Edit PC Member : ${PCMember.memberName }</h1>
+	<c:choose>
+		<c:when test="${ !isNew }">
+			<h1>Edit PC Member : ${PCMember.memberName }</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>New PC Member</h1>
+		</c:otherwise>
+	</c:choose>
+	
 	
 	<form action="<c:url value='/PCMember/Edit'/>"	onsubmit="return validateForm(this)" method="post">
 		
-				<c:if test="${ !isNew }">
-			<input type="hidden" name="id" value="${PCMember.id }" />
+		<c:if test="${ !isNew }">
+			<input type="hidden" name="PCmemberID" value="${PCMember.id }" />
 		</c:if>
 		
 		<label>PC Member Name</label> <br>
@@ -36,7 +44,11 @@
 		<input type="text" name="email" value="${PCMember.email}" /><br><br>
 		
 		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
-		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+		
+		<c:if test="${ !isNew }">
+			<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+		</c:if>
+		
 	</form>
 
 

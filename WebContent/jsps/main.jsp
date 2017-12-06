@@ -89,11 +89,5 @@ iframe {
 		|&nbsp; <a href="<c:url value='/Review/List'/>" target="_parent">View
 			Reviews</a>
 	</div>
-
-
-<img src="/WebContent/images/ERDiagram.png" />
-
-
-
 </body>
 </html>

@@ -29,10 +29,16 @@ public class PCMemberEdit extends HttpServlet {
 		
 		String PK = request.getParameter("email"); //Get pcmember email from url		
 		
-		request.setAttribute("isNew", false);
-	
-		request.setAttribute("PCMember", pcmemberDao.select("SELECT * from PCMember WHERE email = ?", PK).get(0)); //Get the paper
-		
+		if (PK == null) {
+			request.setAttribute("isNew", true);
+			request.setAttribute("PCMember", new PCMember()); // Get the paper
+
+		} else {
+			request.setAttribute("isNew", false);
+			request.setAttribute("PCMember", pcmemberDao.select("SELECT * from PCMember WHERE email = ?", PK).get(0));
+
+		}
+			
 		request.getRequestDispatcher("/jsps/PCMember/edit.jsp").forward(request, response);
 	}
 
@@ -45,18 +51,23 @@ public class PCMemberEdit extends HttpServlet {
 		
 		PCMemberDao pcmemberdao = new PCMemberDao();		
 		PCMember pcmember = new PCMember();
-			
+		
 		pcmember.setEmail(paramMap.get("email")[0]);
 		pcmember.setMemberName(paramMap.get("membername")[0]);
-		pcmember.setId(Integer.parseInt(paramMap.get("id")[0]));
 		
-		String submit = paramMap.get("submit")[0];
+		if (!paramMap.containsKey("PCmemberID")) {
+			pcmemberdao.create(pcmember);
+		} else {
+			pcmember.setId(Integer.parseInt(paramMap.get("PCmemberID")[0]));
 		
-		if(submit.equals("delete")){	
-			pcmemberdao.delete(pcmember);
-		}else{	
-			pcmemberdao.update(pcmember);
-		}		
+			String submit = paramMap.get("submit")[0];
+		
+			if(submit.equals("delete")){	
+				pcmemberdao.delete(pcmember);
+			}else{	
+				pcmemberdao.update(pcmember);
+			}		
+		}
 		
 		response.sendRedirect("/Demo/PCMember/List");
 	}

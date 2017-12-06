@@ -53,7 +53,7 @@ public class PaperEdit extends HttpServlet {
 		request.setAttribute(
 				"PCMembers",
 				pcmemberDao
-						.select("SELECT * FROM pcmember P WHERE 5 > (SELECT count(*) FROM review R WHERE R.email = P.email)")); // Get
+						.select("SELECT * FROM pcmember P WHERE 5 > (SELECT count(*) FROM review R WHERE R.pcmemberid = P.pcmemberid)")); // Get
 																																// all
 		request.setAttribute("AuthorsToSelect", authordao.getAll());																										// the
 																																// PCMembers
@@ -92,12 +92,12 @@ public class PaperEdit extends HttpServlet {
 				ReviewDao reviewdao = new ReviewDao();
 				WritesDao writesdao = new WritesDao();
 
-				if (paramMap.containsKey("reviewers")) {
-					String[] reviewers = paramMap.get("reviewers");
+				if (paramMap.containsKey("PCMemberIds")) {
+					String[] PCMemberIds = paramMap.get("PCMemberIds");
 
-					for (String email : reviewers) {
+					for (String PCMemberId : PCMemberIds) {
 						Review review = new Review();
-						review.setEmail(email);
+						review.setPCMemberId(Integer.parseInt(PCMemberId));
 						review.setPaperID(paperId);
 						reviewdao.create(review);
 					}

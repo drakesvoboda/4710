@@ -6,7 +6,7 @@ import MySqlAnnotations.*;
 public class PCMember {
 	
 	@PrimaryKey
-	@ColumnName("id")
+	@ColumnName("PCmemberID")
 	public int id;
 	
 	@ColumnName("email")

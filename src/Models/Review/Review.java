@@ -8,8 +8,8 @@ import MySqlAnnotations.*;
 public class Review {
 	
 	@PrimaryKey
-	@ColumnName("reportid")
-	public int ReportID;
+	@ColumnName("reviewid")
+	public int id;
 	
 	@ColumnName("subdate")
 	public Date SubDate;
@@ -24,15 +24,15 @@ public class Review {
 	@ForeignKey(ForeignColumn = "paperid", ForeignTable = "paper")
 	public int PaperID;
 	
-	@ColumnName("email")
-	@ForeignKey(ForeignColumn = "email", ForeignTable = "pcmember")
-	public String Email;
+	@ColumnName("PCMemberId")
+	@ForeignKey(ForeignColumn = "PCMemberId", ForeignTable = "pcmember")
+	public int PCMemberId;
 	
-	public int getReportID() {
-		return ReportID;
+	public int getId() {
+		return id;
 	}
-	public void setReportID(int reportID) {
-		ReportID = reportID;
+	public void setId(int reviewId) {
+		id = reviewId;
 	}
 	public Date getSubDate() {
 		return SubDate;
@@ -58,10 +58,10 @@ public class Review {
 	public void setPaperID(int paperID) {
 		PaperID = paperID;
 	}
-	public String getEmail() {
-		return Email;
+	public int getPCMemberId() {
+		return PCMemberId;
 	}
-	public void setEmail(String email) {
-		Email = email;
+	public void setPCMemberId(int PCMemberId) {
+		this.PCMemberId = PCMemberId;
 	}
 }

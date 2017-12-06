@@ -100,10 +100,10 @@
 				<label>Select Reviewers </label>
 				<br>
 
-				<select id="review_select" name="reviewers" size="12"
+				<select id="review_select" name="PCMemberIds" size="12"
 					multiple="multiple">
 					<c:forEach items="${PCMembers}" var="member">
-						<option value="${member.email }">${member.memberName }</option>
+						<option value="${member.id }">${member.memberName }</option>
 					</c:forEach>
 				</select>
 				<br>

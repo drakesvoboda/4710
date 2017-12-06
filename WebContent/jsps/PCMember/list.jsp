@@ -30,6 +30,7 @@
 	  <a href="/Demo/PCMember/Edit?email=${PCMember.email}">${PCMember.memberName}</a> <br>
 	</c:forEach>
 	
+	<a href="/Demo/PCMember/Edit">+ New PC Member</a> <br>
 
   </body>
 </html>

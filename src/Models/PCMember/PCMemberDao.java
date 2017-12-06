@@ -17,7 +17,7 @@ public class PCMemberDao extends Dao<PCMember, Integer> {
 			
 			pcMember.setEmail(resultSet.getString("email"));
 			pcMember.setMemberName(resultSet.getString("memberName"));
-			pcMember.setId(Integer.parseInt(resultSet.getString("id")));
+			pcMember.setId(resultSet.getInt("PCmemberID"));
 			
 			return pcMember;			
 		}
@@ -28,7 +28,7 @@ public class PCMemberDao extends Dao<PCMember, Integer> {
 	}		
 	
 	public List<PCMember> getReviewersForPaper(int PaperID){
-		return select("SELECT * FROM PCMember P WHERE P.email IN (SELECT email FROM review R WHERE R.PaperID = ?)", PaperID);
+		return select("SELECT * FROM PCMember P WHERE P.pcmemberid IN (SELECT pcmemberid FROM review R WHERE R.PaperID = ?)", PaperID);
 	}
 
 }
