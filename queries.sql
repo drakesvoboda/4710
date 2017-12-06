@@ -1,4 +1,4 @@
-#4
+ #4
 select *
 from paper P, writes W, author A
 where A.AuthorName="Damian" 

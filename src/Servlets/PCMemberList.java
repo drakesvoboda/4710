@@ -1,4 +1,4 @@
-package Servlets;
+ package Servlets;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,14 +15,7 @@ public class PCMemberList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PCMemberDao pcmemberDao = new PCMemberDao();
-
-		
-		request.setAttribute("PCMembers", pcmemberDao.getAll()); //Get the paper
-		
-			
-		request.getRequestDispatcher("/jsps/PCMember/list.jsp").forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -34,6 +27,8 @@ public class PCMemberList extends HttpServlet {
 		
 		request.setAttribute("PCMembers", pcmemberDao.getAll()); //Get the paper
 
+		request.setAttribute("PCMembersNoReview", pcmemberDao.getPCMembersWithNoReviews()); //Get the paper
+		request.setAttribute("PCMembersMostReview", pcmemberDao.getPCMembersWithMostReviews()); //Get the paper
 					
 		request.getRequestDispatcher("/jsps/PCMember/list.jsp").forward(request, response);
 	}
