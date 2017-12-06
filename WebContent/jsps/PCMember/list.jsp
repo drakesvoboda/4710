@@ -27,13 +27,24 @@
   <h1>Select a PC Member</h1>
 
 
-<p style="color: red; font-weight: 900"> Select a PC Member</p>
+
+<p style="color: red; font-weight: 900"> Members with the most reviews</p>
+    <c:forEach items="${PCMembersMostReview}" var="PCMember">
+	  <a href="/Demo/PCMember/Edit?email=${PCMember.email}">${PCMember.memberName}</a> <br>
+	</c:forEach>
+
+<p style="color: red; font-weight: 900"> All PC Members</p>
 
     <c:forEach items="${PCMembers}" var="PCMember">
 	  <a href="/Demo/PCMember/Edit?email=${PCMember.email}">${PCMember.memberName}</a> <br>
 	</c:forEach>
-	
+	<br>
 	<a href="/Demo/PCMember/Edit">+ New PC Member</a> <br>
+	
+	<p style="color: red; font-weight: 900"> Members with no reviews</p>
+    <c:forEach items="${PCMembersNoReview}" var="PCMember">
+	  <a href="/Demo/PCMember/Edit?email=${PCMember.email}">${PCMember.memberName}</a> <br>
+	</c:forEach>
 
   </body>
 </html>

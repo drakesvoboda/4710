@@ -30,5 +30,13 @@ public class PCMemberDao extends Dao<PCMember, Integer> {
 	public List<PCMember> getReviewersForPaper(int PaperID){
 		return select("SELECT * FROM PCMember P WHERE P.pcmemberid IN (SELECT pcmemberid FROM review R WHERE R.PaperID = ?)", PaperID);
 	}
+	
+	public List<PCMember> getPCMembersWithMostReviews(){
+		return select("select * from PCMember where PCmemberId in(select PCmemberId from review group by PCmemberId having count(*) = (select max(X.num) from (select PCmemberId, count(*) as num from review group by PCmemberId) AS X))");
+	}
+	
+	public List<PCMember> getPCMembersWithNoReviews(){ 
+		return select("select * from pcmember where PCmemberId NOT IN (select PCmemberId from review)");
+	}
 
 }
