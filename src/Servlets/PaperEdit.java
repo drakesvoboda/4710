@@ -43,8 +43,6 @@ public class PaperEdit extends HttpServlet {
 
 		}
 
-		
-
 		request.setAttribute("Reviewers",
 				pcmemberDao.getReviewersForPaper(Integer.parseInt(PK)));
 
@@ -57,7 +55,6 @@ public class PaperEdit extends HttpServlet {
 																																// all
 		request.setAttribute("AuthorsToSelect", authordao.getAll());																										// the
 																																// PCMembers
-
 		request.getRequestDispatcher("/jsps/paper/edit.jsp").forward(request,
 				response);
 	}
@@ -111,7 +108,7 @@ public class PaperEdit extends HttpServlet {
 					String author = paramMap.get("author[" + i + "]")[0];
 					
 					writes.setAuthorOrder(i);
-					writes.setEmail(author);
+					writes.setAuthorId(Integer.parseInt(author));
 					writes.setPaperId(paperId);
 					
 					writesdao.create(writes);

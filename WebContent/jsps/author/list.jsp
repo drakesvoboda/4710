@@ -30,8 +30,8 @@
 <p style="color: red; font-weight: 900"> Select a paper</p>
 
 
-    <c:forEach items="${Papers}" var="paper">
-	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>
+    <c:forEach items="${Authors}" var="paper">
+	  <a href="/Demo/Author/Edit?id=${author.id }">${author.AuthorName }</a> <br>
 	</c:forEach>
 	
 

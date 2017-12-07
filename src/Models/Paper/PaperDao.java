@@ -35,8 +35,8 @@ public class PaperDao extends Dao<Paper, Integer> {
 	public List<Paper> getPapersRejectedBy(String member1, String member2){
 		return select("select * "
 						+"from review R1,review R2, paper P, pcmember PC1, pcmember PC2 "
-						+"where R1.Recommend='F' "
-						+"AND R2.Recommend='F' "
+						+"where R1.Recommend='0' "
+						+"AND R2.Recommend='0' "
 						+"AND PC1.MemberName=? "
 						+"AND PC2.MemberName=? "
 								+"AND R1.PaperID=R2.PaperID "
@@ -47,7 +47,7 @@ public class PaperDao extends Dao<Paper, Integer> {
 	
 	public List<Paper> getPapersByFirstAuthor(String authorname){
 		return select(
-				"select * from paper P, writes W, author A where A.AuthorName=? AND A.Email=W.Email AND W.PaperID=P.PaperID AND W.AuthorOrder=0",
+				"select * from paper P, writes W, author A where A.AuthorName=? AND A.authorid=W.authorid AND W.PaperID=P.PaperID AND W.AuthorOrder=0",
 				authorname);
 	}
 	
@@ -55,18 +55,18 @@ public class PaperDao extends Dao<Paper, Integer> {
 		return select(
 				"select * from paper where paperid in (select P.paperID "
 						+ "from paper P, writes W, author A "
-						+ "where A.AuthorName=? " + "	AND A.Email=W.Email "
+						+ "where A.AuthorName=? " + "	AND A.authorid=W.authorid "
 						+ "   AND W.PaperID = P.PaperID "
 						+ "	AND W.PaperID IN(select W.PaperID "
 						+ "		from Writes W " + "		Group By W.PaperID "
-						+ "		having count(W.Email)=1)) ", authorname);
+						+ "		having count(W.authorid)=1)) ", authorname);
 	}
 	
 	public List<Paper> getPapersByTwoAuthors(String authorname1, String authorname2){
 		return select( "SELECT * FROM paper WHERE paperid IN "
-				+ " (SELECT w.paperid FROM writes w, author a WHERE w.email = a.email AND a.authorname = ?) "
+				+ " (SELECT w.paperid FROM writes w, author a WHERE w.authorid = a.authorid AND a.authorname = ?) "
 				+ " AND paperid IN "
-				+ " (SELECT w.paperid FROM writes w, author a WHERE w.email = a.email AND a.authorname = ?) "
+				+ " (SELECT w.paperid FROM writes w, author a WHERE w.authorid = a.authorid AND a.authorname = ?) "
 				, authorname1,
 				authorname2);
 	}

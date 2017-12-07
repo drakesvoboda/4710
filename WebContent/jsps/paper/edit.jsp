@@ -91,7 +91,7 @@
 						<c:forEach items="${AuthorsToSelect}" var="author">
 							<div class="author"
 								style="overflow: hidden; padding-bottom: 3px;">
-								<span class="id" style="display: none">${author.getEmail() }</span>
+								<span class="id" style="display: none">${author.getId() }</span>
 								<span class="name">${author.getAuthorName() }</span>
 								<button type="button" style="float: right; margin-left: 5px;"
 									onclick="return fancySelect.addElement(this.parentNode)">-></button>

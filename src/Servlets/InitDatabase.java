@@ -50,7 +50,7 @@ public class InitDatabase extends HttpServlet {
 
 		String[] scanner = new String(
 				"DROP TABLE IF EXISTS Review, PCMember, Writes, Paper, Author;"
-				+ "DROP VIEW IF EXISTS recommended_papers;"
+						+ "DROP VIEW IF EXISTS recommended_papers;"
 						+ "CREATE TABLE Paper	(                                          "
 						+ "	PaperID 	INTEGER AUTO_INCREMENT,                            "
 						+ "	Title 		VARCHAR(50),                                       "
@@ -60,123 +60,124 @@ public class InitDatabase extends HttpServlet {
 						+ ");															   "
 
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
-						+ "VALUES ('Sample 1', 'Lorem Ipsum Dolor', 'Sample PDF');	       " 
-						
+						+ "VALUES ('Sample 1', 'Lorem Ipsum Dolor', 'Sample PDF');	       "
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 2', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 3', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 4', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 5', 'Lorem Ipsum Dolor', 'Sample PDF');	       "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 6', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 7', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 8', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 9', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-						
+
 						+ "INSERT INTO Paper (Title, Abstract, Pdf)						   "
 						+ "VALUES ('Sample 10', 'Lorem Ipsum Dolor', 'Sample PDF');    	   "
-												
-						+"CREATE TABLE Author	(                                          "
+
+						+ "CREATE TABLE Author	(                                          "
+						+ " authorid INTEGER AUTO_INCREMENT, "
 						+ "	Email 		VARCHAR(100),                                      "
 						+ "	AuthorName 	VARCHAR(50),                                       "
 						+ "	Affiliation VARCHAR(100),                                      "
-						+ "	PRIMARY KEY (email)                                            "
+						+ " UNIQUE(email), 													"
+						+ "	PRIMARY KEY (authorid)                                          "
 						+ ");                                                              "
 
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('drake@author.com', 'Drake', 'ASU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('denise@author.com', 'Denise', 'BSU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('donald@author.com', 'Donald', 'CSU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('dave@author.com', 'Dave', 'DSU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('donovan@author.com', 'Donovan', 'ESU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('donna@author.com', 'Donna', 'FSU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('debbie@author.com', 'Debbie', 'GSU');    	   "
 
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('damian@author.com', 'Damian', 'HSU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('dan@author.com', 'Dan', 'ISU');    	   "
-						
+
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('don@author.com', 'Don', 'JSU');    	   "
-						
+
 						+ "CREATE TABLE Writes(                                            "
 						+ "	PaperID 	INTEGER,                                           "
-						+ "	Email 		VARCHAR(50),                                       "
+						+ "	AuthorID 	INTEGER,                                       "
 						+ "	AuthorOrder INTEGER,                                           "
-						+ "	PRIMARY KEY (PaperID, Email),                                  "
+						+ "	PRIMARY KEY (PaperID, authorid),                                  "
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID) ON DELETE CASCADE,               "
-						+ "	FOREIGN KEY (Email) REFERENCES Author(Email) ON DELETE CASCADE                  "
+						+ "	FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID) ON DELETE CASCADE                  "
 						+ ");                                                              "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (1, 'don@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (1, 1, 0);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (1, 'dan@author.com', 1);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (1, 2, 1);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (2, 'dan@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (2, 2, 0);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (2, 'don@author.com', 1);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (2, 1, 1);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (2, 'damian@author.com', 2);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (2, 3, 2);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (3, 'damian@author.com', 0);    	   "
-						
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (4, 'debbie@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (3, 3, 0);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (5, 'donna@author.com', 0);    	   "
-						
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (6, 'donovan@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (4, 4, 0);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (7, 'dave@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (5, 5, 0);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (8, 'donald@author.com', 0);    	   "
-						
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (9, 'denise@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (6, 6, 0);    	   "
 
-						+ "INSERT INTO Writes (PaperID, Email, AuthorOrder)						   "
-						+ "VALUES (10, 'drake@author.com', 0);    	   "
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (7, 7, 0);    	   "
 
-						
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (8, 8, 0);    	   "
+
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (9, 9, 0);    	   "
+
+						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
+						+ "VALUES (10, 10, 0);    	   "
+
 						+ "CREATE TABLE PCMember(                                          "
-						+ "	PCMemberID	INTEGER	AUTO_INCREMENT,							   "                                        
+						+ "	PCMemberID	INTEGER	AUTO_INCREMENT,							   "
 						+ "	Email 		VARCHAR(50),                                       "
 						+ "	MemberName 	VARCHAR(20),                                       "
 						+ "	PRIMARY KEY (PCMemberID),		                                       "
@@ -224,7 +225,7 @@ public class InitDatabase extends HttpServlet {
 						+ "	FOREIGN KEY (PaperID) REFERENCES Paper(PaperID) ON DELETE CASCADE,               "
 						+ "	FOREIGN KEY (PCMemberID) REFERENCES PCMember(PCMemberID) ON DELETE CASCADE,                "
 						+ "	UNIQUE (PaperID, PCMemberID)                                        "
-						+ ");"						
+						+ ");"
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 2, 1);	 	   				   "
@@ -243,7 +244,7 @@ public class InitDatabase extends HttpServlet {
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 4, 3);	 	   				   "
-				
+
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 6, 1);	 	   				   "
 
@@ -252,7 +253,7 @@ public class InitDatabase extends HttpServlet {
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 6, 2);	 	   				   "
-				
+
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 1);	 	   				   "
 
@@ -261,7 +262,7 @@ public class InitDatabase extends HttpServlet {
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 8, 3);	 	   				   "
-				
+
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 1);	 	   			   "
 
@@ -270,21 +271,15 @@ public class InitDatabase extends HttpServlet {
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 3);	 	   			   "
-						
-						+ " CREATE VIEW recommended_papers AS "
-						+ " Select * "
-						+ " from paper "
-						+ " Where paperID IN "
-						+ " (select P.paperID "
-						+ " from paper P, review R "
-						+ " Where R.Recommend='1' "
-						+ " AND P.paperID=R.PaperID "
-						+ " Group by P.paperID "
-						+ " having count(*)>1) "
-				
-				)
-				.split(";");
 
+						+ " CREATE VIEW recommended_papers AS " + " Select * "
+						+ " from paper " + " Where paperID IN "
+						+ " (select P.paperID " + " from paper P, review R "
+						+ " Where R.Recommend='1' "
+						+ " AND P.paperID=R.PaperID " + " Group by P.paperID "
+						+ " having count(*)>1) "
+
+		).split(";");
 
 		try (Connection connect = ConnectionManager.getConnection()) {
 			for (int i = 0; i < scanner.length; ++i) {
@@ -299,21 +294,21 @@ public class InitDatabase extends HttpServlet {
 					statement = null;
 				}
 			}
-			
+
 			response.setContentType("text/html");
-			  PrintWriter out = response.getWriter();
-			  out.append("Success");
-			  out.close();
+			PrintWriter out = response.getWriter();
+			out.append("Success");
+			out.close();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			response.setContentType("text/html");
-			  PrintWriter out = response.getWriter();
-			  out.append("Failed: " + e.getMessage());
-			  out.close();
+			PrintWriter out = response.getWriter();
+			out.append("Failed: " + e.getMessage());
+			out.close();
 			e.printStackTrace();
-		} finally{
-			  
+		} finally {
+
 		}
 	}
 }
