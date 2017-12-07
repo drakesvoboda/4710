@@ -24,14 +24,14 @@
   <a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
 <hr>
   
-  <h1>Select a paper to add reviews to</h1>
+  <h1>Select an author</h1>
 
 
 <p style="color: red; font-weight: 900"> Select an Author</p>
 
 
-    <c:forEach items="${Authors}" var="paper">
-	  <a href="/Demo/Author/Edit?id=${author.id }">${author.AuthorName }</a> <br>
+    <c:forEach items="${Authors}" var="author">
+	  <a href="/Demo/Author/Edit?id=${author.id }">${author.getAuthorName() }</a> <br>
 	</c:forEach>
 	
 

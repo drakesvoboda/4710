@@ -21,13 +21,13 @@
  
   <servlet>
     <description></description>
-    <display-name>AuthorUpdate</display-name>
-    <servlet-name>AuthorUpdate</servlet-name>
-    <servlet-class>Servlets.AuthorUpdate</servlet-class>
+    <display-name>AuthorEdit</display-name>
+    <servlet-name>AuthorEdit</servlet-name>
+    <servlet-class>Servlets.AuthorEdit</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AuthorUpdate</servlet-name>
-    <url-pattern>/Author/Update</url-pattern>
+    <servlet-name>AuthorEdit</servlet-name>
+    <url-pattern>/Author/Edit</url-pattern>
   </servlet-mapping>
   
   <servlet>

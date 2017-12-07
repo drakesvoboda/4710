@@ -25,21 +25,21 @@ public class AuthorEdit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PCMemberDao pcmemberDao = new PCMemberDao();
+		AuthorDao authorDao = new AuthorDao();
 		
-		String PK = request.getParameter("email"); //Get pcmember email from url		
+		String PK = request.getParameter("id"); //Get pcmember email from url		
 		
 		if (PK == null) {
 			request.setAttribute("isNew", true);
-			request.setAttribute("PCMember", new PCMember()); // Get the paper
+			request.setAttribute("Author", new PCMember()); // Get the paper
 
 		} else {
 			request.setAttribute("isNew", false);
-			request.setAttribute("PCMember", pcmemberDao.select("SELECT * from PCMember WHERE email = ?", PK).get(0));
+			request.setAttribute("Author", authorDao.select("SELECT * from Author WHERE authorid = ?", Integer.parseInt(PK)).get(0));
 
 		}
 			
-		request.getRequestDispatcher("/jsps/PCMember/edit.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsps/author/edit.jsp").forward(request, response);
 	}
 
 	/**
