@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import Models.Author.Author;
-import Models.Writes.Writes;
 import Dao.Dao;
 import Dao.IMapper;
 

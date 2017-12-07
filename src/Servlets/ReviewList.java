@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dao.ConnectionManager;
-import Models.Review.ReviewDao;
 
 
 public class ReviewList extends HttpServlet {

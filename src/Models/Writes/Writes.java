@@ -1,7 +1,5 @@
 package Models.Writes;
 
-import java.io.Serializable;
-
 import MySqlAnnotations.*;
 
 @TableName("writes")

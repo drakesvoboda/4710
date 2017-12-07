@@ -1,7 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,14 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Models.Author.AuthorDao;
 import Models.PCMember.PCMemberDao;
 import Models.PCMember.PCMember;
-import Models.Paper.Paper;
-import Models.Paper.PaperDao;
-import Models.Review.Review;
-import Models.Review.ReviewDao;
-import Models.Writes.WritesDao;
 
 
 

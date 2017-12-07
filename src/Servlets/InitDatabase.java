@@ -4,17 +4,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.util.Scanner;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Dao.ConnectionManager;
-import Models.Paper.Paper;
-import Models.Paper.PaperDao;
-import MySqlAnnotations.ColumnName;
 
 /**
  * Servlet implementation class UserServlet
