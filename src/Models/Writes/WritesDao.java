@@ -16,7 +16,7 @@ public class WritesDao extends Dao<Writes, WritesPK> {
 		public Writes map(ResultSet resultSet) throws SQLException{
 			Writes writes = new Writes();
 			
-			writes.setEmail(resultSet.getString("email"));
+			writes.setAuthorId(resultSet.getInt("authorid"));
 			writes.setPaperId(resultSet.getInt("paperid"));
 			writes.setAuthorOrder(resultSet.getInt("authororder"));
 			

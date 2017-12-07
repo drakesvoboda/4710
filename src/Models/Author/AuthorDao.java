@@ -16,6 +16,7 @@ public class AuthorDao extends Dao<Author, String> {
 		public Author map(ResultSet resultSet) throws SQLException{
 			Author author = new Author();
 			
+			author.setId(resultSet.getInt("authorid"));
 			author.setEmail(resultSet.getString("email"));
 			author.setAuthorName(resultSet.getString("authorname"));
 			author.setAffiliation(resultSet.getString("affiliation"));
@@ -34,7 +35,7 @@ public class AuthorDao extends Dao<Author, String> {
 	}
 	
 	public List<Author> getAuthorsForPaper(int paperId){
-		return select("Select * From writes W, author A Where W.PaperID=? AND W.email=A.email Order by W.authorOrder asc", paperId);		
+		return select("Select * From writes W, author A Where W.PaperID=? AND W.authorid=A.authorid Order by W.authorOrder asc", paperId);		
 	
 		
 	}

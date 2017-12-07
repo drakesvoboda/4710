@@ -11,8 +11,8 @@ public class Writes {
 	@ColumnName("paperid")
 	public int PaperId;
 	@PrimaryKey
-	@ColumnName("email")
-	public String Email;
+	@ColumnName("authorid")
+	public int authorId;
 	@ColumnName("authororder")
 	public int AuthorOrder;
 	
@@ -27,11 +27,11 @@ public class Writes {
 	public void setPaperId(int paperId) {
 		PaperId = paperId;
 	}
-	public String getEmail() {
-		return Email;
+	public int getAuthorId() {
+		return authorId;
 	}
-	public void setEmail(String email) {
-		Email = email;
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
 	}
 	public int getAuthorOrder() {
 		return AuthorOrder;

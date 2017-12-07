@@ -22,11 +22,20 @@ public class Author {
 	public void setAffiliation(String affiliation) {
 		Affiliation = affiliation;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
+	@PrimaryKey
+	@ColumnName("authorid")
+	public int id;
+
 	@ColumnName("email")
 	public String Email;
 	
-	@PrimaryKey
 	@ColumnName("authorname")
 	public String AuthorName;
 	
