@@ -18,6 +18,20 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 
+	<style>
+#author-view .selected-author {
+	width: calc(100% - 60px);
+	float: left;
+	padding: 5px 0;
+	border-bottom: 1px solid #f4f4f4;
+}
+
+#author-view button {
+	width: 30px;
+	float: left;
+	height: 30px;
+}
+</style>
 </head>
 
 <body>
@@ -146,21 +160,6 @@
 
 
 	</form>
-
-	<style>
-#author-view .selected-author {
-	width: calc(100% - 60px);
-	float: left;
-	padding: 5px 0;
-	border-bottom: 1px solid #f4f4f4;
-}
-
-#author-view button {
-	width: 30px;
-	float: left;
-	height: 30px;
-}
-</style>
 
 	<script>
 		var fancySelect = (function() {

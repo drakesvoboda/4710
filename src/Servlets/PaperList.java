@@ -1,15 +1,12 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Models.Author.AuthorDao;
-import Models.PCMember.PCMemberDao;
 import Models.Paper.PaperDao;
 
 public class PaperList extends HttpServlet {
