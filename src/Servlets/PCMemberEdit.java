@@ -27,7 +27,7 @@ public class PCMemberEdit extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PCMemberDao pcmemberDao = new PCMemberDao();
 		
-		String PK = request.getParameter("email"); //Get pcmember email from url		
+		String PK = request.getParameter("id"); //Get pcmember email from url		
 		
 		if (PK == null) {
 			request.setAttribute("isNew", true);
@@ -35,7 +35,7 @@ public class PCMemberEdit extends HttpServlet {
 
 		} else {
 			request.setAttribute("isNew", false);
-			request.setAttribute("PCMember", pcmemberDao.select("SELECT * from PCMember WHERE email = ?", PK).get(0));
+			request.setAttribute("PCMember", pcmemberDao.select("SELECT * from PCMember WHERE pcmemberid = ?", Integer.parseInt(PK)).get(0));
 
 		}
 			
