@@ -88,6 +88,8 @@ iframe {
 			PC Members</a>
 		|&nbsp; <a href="<c:url value='/Review/List'/>" target="_parent">View
 			Reviews</a>
+		|&nbsp; <a href="<c:url value='/Author/List'/>" target="_parent">View
+			Authors</a>
 	</div>
 </body>
 </html>

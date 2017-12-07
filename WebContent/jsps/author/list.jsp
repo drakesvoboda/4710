@@ -27,11 +27,11 @@
   <h1>Select a paper to add reviews to</h1>
 
 
-<p style="color: red; font-weight: 900"> Select a paper</p>
+<p style="color: red; font-weight: 900"> Select an Author</p>
 
 
-    <c:forEach items="${Papers}" var="paper">
-	  <a href="/Demo/Paper/Edit?id=${paper.id }">${paper.title }</a> <br>
+    <c:forEach items="${Authors}" var="author">
+	  <a href="/Demo/Author/Edit?id=${author.email }">${author.getAuthorName }</a> <br>
 	</c:forEach>
 	
 

@@ -21,6 +21,28 @@
  
   <servlet>
     <description></description>
+    <display-name>AuthorUpdate</display-name>
+    <servlet-name>AuthorUpdate</servlet-name>
+    <servlet-class>Servlets.AuthorUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthorUpdate</servlet-name>
+    <url-pattern>/Author/Update</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>AuthorList</display-name>
+    <servlet-name>AuthorList</servlet-name>
+    <servlet-class>Servlets.AuthorList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthorList</servlet-name>
+    <url-pattern>/Author/List</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
     <display-name>PaperUpdate</display-name>
     <servlet-name>PaperUpdate</servlet-name>
     <servlet-class>Servlets.PaperUpdate</servlet-class>
