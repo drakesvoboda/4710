@@ -18,11 +18,8 @@ Step 2.2 Ensure Tomcat 7 library is on the projects build path
 
 Step 3. Run the \WebContent\jsps\main.jsp file on the Tomcat server
 
-Step 4. Click initialize database button on homepage
-
-Step 5. Select a paper from the "View Papers" page
-
-Step 6. Select 3 reviewers for the paper and click submit
+Step 4. From the window menu, select web browser and then select "default system web browser"
+	(preferably Google Chrome)
 
 ## Using the database
 
@@ -51,10 +48,11 @@ pc member completely.
 To add a pc member: navigate to "Main Page" and click "View PC Members". Click "+ Create a pc member" and 
 fill in the required fields and click "Update".
 
-3. To delect or update a review: navigate to "Main Page" and click "View Reviews". Select a 
-review from the list. Update the desired fields and click "Update" or click delete to delete the 
-pc member completely. The submitted date automatically updates when a review is updated. 
-to insert a review: navigate to "Main Page" and click "View Papers" and then select the desired paper.
+3. To update a review: navigate to "Main Page" and click "View Reviews". Select a 
+review from the list. Update the desired fields and click "Update". The submitted date automatically updates when a review is updated. 
+To delete a review: navigate to "Main Page" and click "View Reviews". Select a new pc member to review 
+the paper and then click "delete" to delete the review. 
+To insert a review: navigate to "Main Page" and click "View Papers" and then select the desired paper.
 Select three reviewers from the list of available reviewers and then assign them to that paper by clicking "update".
 
 4. To list all papers written by a single author with a given name: navigate to "Main Page" and click "View Papers". Select the author's name from the drop down menu, select "Single Author" and click "Go. 

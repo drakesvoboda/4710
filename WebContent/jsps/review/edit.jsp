@@ -61,6 +61,13 @@
 						</c:forEach>
 					</select>
 		
+		<select id="replacementPCMember" name="replacementPCMember" size="12">
+			<c:forEach items="${PCMembers}" var="member">
+				<option value="${member.id }">${member.memberName }</option>
+			</c:forEach>
+		</select>
+		
+
 	</form>
 
 </body>
