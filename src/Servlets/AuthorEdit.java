@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Models.Author.Author;
 import Models.Author.AuthorDao;
 import Models.PCMember.PCMemberDao;
 import Models.PCMember.PCMember;
@@ -46,26 +47,26 @@ public class AuthorEdit extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		Map<String,String[]> paramMap = request.getParameterMap();	
 		
-		PCMemberDao pcmemberdao = new PCMemberDao();		
-		PCMember pcmember = new PCMember();
+		AuthorDao authordao = new AuthorDao();		
+		Author author = new Author();
 		
-		pcmember.setEmail(paramMap.get("email")[0]);
-		pcmember.setMemberName(paramMap.get("membername")[0]);
+		author.setEmail(paramMap.get("email")[0]);
+		author.setAuthorName(paramMap.get("authorname")[0]);
+		author.setAffiliation(paramMap.get("affiliation")[0]);
 		
-		if (!paramMap.containsKey("PCmemberID")) {
-			pcmemberdao.create(pcmember);
+		if (!paramMap.containsKey("authorid")) {
+			authordao.create(author);
 		} else {
-			pcmember.setId(Integer.parseInt(paramMap.get("PCmemberID")[0]));
+			author.setId(Integer.parseInt(paramMap.get("authorid")[0]));
 		
 			String submit = paramMap.get("submit")[0];
 		
 			if(submit.equals("delete")){	
-				pcmemberdao.delete(pcmember);
+				authordao.delete(author);
 			}else{	
-				pcmemberdao.update(pcmember);
+				authordao.update(author);
 			}		
 		}
 		
