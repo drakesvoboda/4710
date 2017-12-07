@@ -33,6 +33,7 @@
     <c:forEach items="${Authors}" var="author">
 	  <a href="/Demo/Author/Edit?id=${author.id }">${author.getAuthorName() }</a> <br>
 	</c:forEach>
+	<br>  <a href="/Demo/Author/Edit">+ New Author</a> <br>
 	
 
   </body>

@@ -24,62 +24,31 @@
 <a href="/Demo/jsps/main.jsp">MAIN PAGE</a>
 <hr>
 
-	<h1>Edit Paper : ${Paper.title }</h1>
+	<h1>Edit Author : ${Author.getAuthorName() }</h1>
 
+			<form action="<c:url value='/Author/Edit'/>" method="post">
+		
+		<c:if test="${ !isNew }">
+			<input type="hidden" name="authorid" value="${Author.getId() }" />
+		</c:if>
+		
+		<label>Author Name</label> <br>
+		<input type="text" name="authorname" value="${Author.getAuthorName()}" /><br><br>
 
-<script>
+		<label>Author Affiliation</label> <br>
+		<input type="text" name="affiliation" value="${Author.getAffiliation()}" /><br><br>
 
-function validateForm(){
-	var reviewSelect = document.getElementById("review_select");
-	
-	var options = reviewSelect.options;
-	
-	var count = 0;
-	
-	for(var i = 0, len = options.length; i < len; ++i){
-		if(options[i].selected) {
-			++count;
-		}
-	}
-	
-	if (count != 3) {
-        alert("Must select exactly 3 reviewers");
-        return false;
-    }else{
-    	return true;
-    }
-}
-
-</script>
-
-	<c:choose>
-		<c:when test="${ Reviewers.size() > 0 }">
-			<h4>Assigned Reviewers</h4>
-			<ul>
-				<c:forEach items="${Reviewers}" var="member">
-					<li>${member.memberName }</li>
-				</c:forEach>
-			</ul>
-
-		</c:when>
-		<c:otherwise>
-			<form action="<c:url value='/Paper/Update'/>" onsubmit="return validateForm()"  method="post">
-				<input type="hidden" name="PaperId" value="${Paper.id }" /> <br>
-				<label>Select Reviewers </label> <br> 
-				
-				<select id="review_select" name="reviewers"
-					size="12" multiple="multiple">
-					<c:forEach items="${PCMembers}" var="member">
-						<option value="${member.email }">${member.memberName }</option>
-					</c:forEach>
-				</select><br>
-
-				<button type="submit">Submit</button>
-			</form>
-		</c:otherwise>
-	</c:choose>
-
-
+		<label>Author Email</label> <br>
+		<input type="text" name="email" value="${Author.getEmail()}" /><br><br>
+		
+		<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="update" />
+		
+		<c:if test="${ !isNew }">
+			<input onclick="this.form.submited=this.value;" type="submit" name="submit" value="delete" />
+		</c:if>
+		
+	</form>
+		
 
 </body>
 </html>

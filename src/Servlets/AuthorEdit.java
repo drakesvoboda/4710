@@ -32,7 +32,7 @@ public class AuthorEdit extends HttpServlet {
 		
 		if (PK == null) {
 			request.setAttribute("isNew", true);
-			request.setAttribute("Author", new PCMember()); // Get the paper
+			request.setAttribute("Author", new Author()); // Get the paper
 
 		} else {
 			request.setAttribute("isNew", false);
@@ -70,7 +70,7 @@ public class AuthorEdit extends HttpServlet {
 			}		
 		}
 		
-		response.sendRedirect("/Demo/PCMember/List");
+		response.sendRedirect("/Demo/Author/List");
 	}
 
 }
