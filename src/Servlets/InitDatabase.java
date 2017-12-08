@@ -97,10 +97,10 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES ('drake@author.com', 'Drake', 'ASU');    	   "
 
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
-						+ "VALUES ('denise@author.com', 'Denise', 'BSU');    	   "
+						+ "VALUES ('zhang@author.com', 'Zhang', 'BSU');    	   "
 
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
-						+ "VALUES ('donald@author.com', 'Donald', 'CSU');    	   "
+						+ "VALUES ('lu@author.com', 'Lu', 'CSU');    	   "
 
 						+ "INSERT INTO Author (Email, AuthorName, Affiliation)						   "
 						+ "VALUES ('dave@author.com', 'Dave', 'DSU');    	   "
@@ -139,13 +139,13 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES (1, 2, 1);    	   "
 
 						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
-						+ "VALUES (2, 2, 0);    	   "
+						+ "VALUES (2, 2, 2);    	   "
 
 						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
 						+ "VALUES (2, 1, 1);    	   "
 
 						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
-						+ "VALUES (2, 3, 2);    	   "
+						+ "VALUES (2, 3, 0);    	   "
 
 						+ "INSERT INTO Writes (PaperID, authorid, AuthorOrder)						   "
 						+ "VALUES (3, 3, 0);    	   "
@@ -183,7 +183,7 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES ('john@test.com', 'John');	    	   				   "
 
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
-						+ "VALUES ('joe@test.com', 'Joe');	    	   					   "
+						+ "VALUES ('matt@test.com', 'Matt');	    	   					   "
 
 						+ "INSERT INTO PCMember (Email, MemberName)						   "
 						+ "VALUES ('james@test.com', 'James');	    	   				   "
@@ -250,22 +250,22 @@ public class InitDatabase extends HttpServlet {
 						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 6, 2);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 1);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 4);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 2);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 8, 5);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 8, 3);	 	   				   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '0', 8, 6);	 	   				   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 1);	 	   			   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 4);	 	   			   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 2);	 	   			   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 5);	 	   			   "
 
 						+ "INSERT INTO Review (Subdate, Comment, Recommend, PaperID, PCMemberID)	   "
-						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 3);	 	   			   "
+						+ "VALUES ('2017-11-1', 'Comment on paper', '1', 10, 6);	 	   			   "
 
 						+ " CREATE VIEW recommended_papers AS " + " Select * "
 						+ " from paper " + " Where paperID IN "
