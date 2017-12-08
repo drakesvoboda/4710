@@ -19,7 +19,7 @@ Step 2.2 Ensure Tomcat 7 library is on the projects build path
 Step 3. Run the \WebContent\jsps\main.jsp file on the Tomcat server
 
 Step 4. From the window menu, select web browser and then select "default system web browser"
-	(preferably Google Chrome)
+	(preferably Google Chrome). Some of the projects JavaScript require's modern browser functionality not supported in the eclipse browser 
 
 ## Using the database
 
@@ -38,9 +38,10 @@ Part 2 requirements:
 from the list. Update the desired fields and click "Update" or click delete to delete the paper
 completely.
 To add a paper: navigate to "Main Page" and click "View Papers". Click "+ Create a paper" and 
-fill in the required fields and click "Update". Once the paper has been created select it from
-the list of papers and add any authors. Adjust the order of the authors with the up and down
-arrows next to the selected author's name. Then add reviewers to the paper. Click "update" when done.
+fill in the required fields and click "Update". Authors and reviewers can be selected during the 
+creation of the paper. Adjust the order of the authors with the up and down arrows next to the selected 
+author's name. Click "update" when done. To enforce the constraint that each paper must have 3 reviews,
+3 reviewers must be selected using the multi-select box when adding or updating a paper. 
 
 2. To delete or update a pc member: navigate to "Main Page" and click "View PC Members". Select a 
 pc member from the list. Update the desired fields and click "Update" or click delete to delete the 
@@ -54,18 +55,20 @@ To delete a review: navigate to "Main Page" and click "View Reviews". Select a n
 the paper and then click "delete" to delete the review. 
 To insert a review: navigate to "Main Page" and click "View Papers" and then select the desired paper.
 Select three reviewers from the list of available reviewers and then assign them to that paper by clicking "update".
+If a PC Member is
+already assigned to 5 reviews, he is not displayed as an option in the select box
 
-4. To list all papers written by a single author with a given name: navigate to "Main Page" and click "View Papers". Select the author's name from the drop down menu, select "Single Author" and click "Go. 
+4. To list all papers written by a single author with a given name: navigate to "Main Page" and click "View Papers". Select the author's name from the drop down menu, select "Single Author" and click "Go". 
 
-5. To list all papers with a given author as the first author: navigate to "Main Page" and click "View Papers". Select the author's name from the drop down menu, select "First Author" and click "Go. 
+5. To list all papers with a given author as the first author: navigate to "Main Page" and click "View Papers". Select the author's name from the drop down menu, select "First Author" and click "Go". 
 
-6. To list all papers coauthored by two given authors: navigate to "Main Page" and click "View Papers". Select the names from the drop down menu, select "Multiple Authors" and click "Go. 
+6. To list all papers coauthored by two given authors: navigate to "Main Page" and click "View Papers". Select "Multiple Authors", Select the names from the drop down menus and click "Go". 
 
 7. To view the pc members with the most reviews: navigate to "Main Page" and click "View PC Members". The names
-of the pc members are listed at the top of the page.
+of the pc members with the most reviews are listed at the top of the page.
 
 8. To view the pc members with no reviews: navigate to "Main Page" and click "View PC Members". The names
-of the pc members are listed at the bottom of the page.
+of the pc members with no reviews are listed at the bottom of the page.
 
 9. To list the papers rejected by two given pc members: navigate to "Main Page" and click "View PC Members".
 At the top of the page select the desired pc members and click "Go".
