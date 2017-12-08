@@ -86,7 +86,7 @@
 		<br> <br> <label>PDF</label><br>
 		<textarea name="pdf">${Paper.pdf}</textarea>
 		<br> <br>
-		<c:if test="${ !isNew }">
+	
 			<c:if test="${ Authors.size() > 0 }">
 				<h4>
 					Authors <small>In Order</small>
@@ -146,7 +146,6 @@
 				</c:otherwise>
 			</c:choose>
 
-		</c:if>
 
 
 
